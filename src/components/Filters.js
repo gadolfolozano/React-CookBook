@@ -4,20 +4,20 @@ class Filters extends Component {
   render() {
     return (
       <div>
-        <label>One
-          <input type="checkbox"/>
+        <label>
+          <input type="checkbox"/>Pastas
         </label>
-
-        <label>Two
-          <input type="checkbox"/>
+        <br/>
+        <label>
+          <input type="checkbox"/>Salads
         </label>
-
-        <label>Three
-          <input type="checkbox"/>
+        <br/>
+        <label>
+          <input type="checkbox"/>Meat
         </label>
-
-        <label>Four
-          <input type="checkbox"/>
+        <br/>
+        <label>
+          <input type="checkbox"/>Desserts
         </label>
       </div>
   );
