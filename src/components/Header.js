@@ -16,15 +16,20 @@ class Header extends Component {
 const styles = {
 	viewStyle: {
 		backgroundColor: '#f8f8f8',
-		height: 80,
-		alignItems: 'center',
-		justifyContent: 'center',
+		paddingTop: 10,
+		paddingBottom: 10
 	},
 
 	textStyle: {
-		fontSize: 40,
-    marginTop: 0
+    marginTop: 0,
+    marginBottom: 0,
+    marginLeft: 20,
+		textAlign: 'left',
+    color: '#f0692f',
+    cursive: true,
+    fontSize: 30,
+    fontWeight: 'normal'
 	}
 };
 
-export default Header;
+export { Header };

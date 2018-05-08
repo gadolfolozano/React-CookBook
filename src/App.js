@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from './components/Header'
+import { Header, SearchBox, Filters } from './components'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Header>Avantica</Header>
+      <div>
+        <Header>Avantica CookBook</Header>
+        <SearchBox/>
+        <Filters />
       </div>
     );
   }
