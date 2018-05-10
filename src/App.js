@@ -5,7 +5,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header>Avantica CookBook</Header>
+        <Header>Avantica CookBook (Mode: {process.env.NODE_ENV})</Header>
         <SearchBox/>
         <Filters />
       </div>
