@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import { Header, SearchBox, Filters } from './components'
 
 class App extends Component {
