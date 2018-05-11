@@ -5,7 +5,10 @@ const CategoryFilter = (props) => (
 
   <div>
     <label>
-      <input type="checkbox" defaultChecked={props.selected}/>{props.text}
+      <input
+        onChange={props.onClick}
+        type="checkbox"
+        checked={props.selected}/>{props.text}
     </label>
     <br/>
   </div>

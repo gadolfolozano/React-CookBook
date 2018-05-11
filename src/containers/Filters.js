@@ -6,6 +6,11 @@ const mapStateToProps = state => ({
   categories: state.categories
 })
 
+const mapDispatchToProps = dispatch => ({
+  toggleCategory: id => dispatch(toggleCategory(id))
+})
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(CategoryFilterList)

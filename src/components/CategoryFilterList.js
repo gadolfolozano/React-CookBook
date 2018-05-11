@@ -9,6 +9,7 @@ const CategoryFilterList = (props) => (
       <CategoryFilter
         key={category.id}
         {...category}
+        onClick={() => props.toggleCategory(category.id)}
       />
     )}
   </div>
@@ -19,7 +20,8 @@ CategoryFilterList.propTypes = {
     id: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
     selected: PropTypes.bool.isRequired
-  }).isRequired).isRequired
+  }).isRequired).isRequired,
+  toggleCategory: PropTypes.func.isRequired
 }
 
 export { CategoryFilterList };

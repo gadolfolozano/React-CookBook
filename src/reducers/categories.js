@@ -8,11 +8,11 @@ const initialState = [
 const categories = (state = initialState, action) => {
   switch (action.type) {
     case 'TOGGLE_CATEGORY':
-      return state.map(category =>
-        (category.id === category.id)
-          ? {...category, selected: !todo.completed}
-          : category
-      )
+    return state.map(category =>
+      (category.id === action.id)
+        ? {...category, selected: !category.selected}
+        : category
+    )
     default:
       return state
   }
