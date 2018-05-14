@@ -1,27 +1,46 @@
-let nextTodoId = 0
-export const addTodo = text => ({
-  type: 'ADD_TODO',
-  id: nextTodoId++,
-  text
-})
-
-export const setVisibilityFilter = filter => ({
-  type: 'SET_VISIBILITY_FILTER',
-  filter
-})
-
-export const toggleTodo = id => ({
-  type: 'TOGGLE_TODO',
-  id
-})
-
-export const VisibilityFilters = {
-  SHOW_ALL: 'SHOW_ALL',
-  SHOW_COMPLETED: 'SHOW_COMPLETED',
-  SHOW_ACTIVE: 'SHOW_ACTIVE'
-}
+export const REQUEST_POSTS = 'REQUEST_POSTS'
+export const RECEIVE_POSTS = 'RECEIVE_POSTS'
+export const REQUEST_CATEGORIES = 'REQUEST_CATEGORIES'
+export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
+export const TOGGLE_CATEGORY = 'TOGGLE_CATEGORY'
 
 export const toggleCategory = id => ({
-  type: 'TOGGLE_CATEGORY',
+  type: TOGGLE_CATEGORY,
   id
 })
+
+export const requestCategories = () => ({
+  type: REQUEST_CATEGORIES
+})
+
+export const receiveCategories = (json) => ({
+  type: RECEIVE_CATEGORIES,
+  resCategories: json.map(child => child),
+  receivedAt: Date.now()
+})
+
+export const fetchCategories = () => dispatch => {
+  dispatch(requestCategories())
+  return fetch(`http://localhost:3000/v1/categories`)
+    .then(response => response.json())
+    .then(json => dispatch(receiveCategories(json)))
+}
+
+export const requestPosts = subreddit => ({
+  type: REQUEST_POSTS,
+  subreddit
+})
+
+export const receivePosts = (subreddit, json) => ({
+  type: RECEIVE_POSTS,
+  subreddit,
+  posts: json.data.children.map(child => child.data),
+  receivedAt: Date.now()
+})
+
+export const fetchPosts = subreddit => dispatch => {
+  dispatch(requestPosts(subreddit))
+  return fetch(`https://www.reddit.com/r/${subreddit}.json`)
+    .then(response => response.json())
+    .then(json => dispatch(receivePosts(subreddit, json)))
+}

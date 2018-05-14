@@ -3,7 +3,7 @@ import { toggleCategory } from '../actions'
 import { CategoryFilterList } from '../components'
 
 const mapStateToProps = state => ({
-  categories: state.categories
+  categories: state.categories.items
 })
 
 const mapDispatchToProps = dispatch => ({

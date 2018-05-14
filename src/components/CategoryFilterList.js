@@ -17,7 +17,7 @@ const CategoryFilterList = (props) => (
 
 CategoryFilterList.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     selected: PropTypes.bool.isRequired
   }).isRequired).isRequired,
