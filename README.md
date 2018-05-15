@@ -6,11 +6,11 @@ You must have installed Nodejs and npm first, then in the project directory run:
 
 After that run:
 
-### `npm run start:dev`  
+### `npm run build:dev`  
 
 or in pre-production mode:
 
-### `npm run start:preprod`  
+### `npm run build:preprod`  
 
 
 ## Configure the backend
