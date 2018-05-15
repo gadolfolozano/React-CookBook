@@ -24,7 +24,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header>Avantica CookBook (Mode: {process.env.NODE_ENV})</Header>
+        <Header>Avantica CookBook pruebas (Mode: {process.env.NODE_ENV})</Header>
         <SearchBox/>
         {this.renderFilters()}
       </div>

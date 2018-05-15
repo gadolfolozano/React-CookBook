@@ -20,6 +20,12 @@ const store = createStore(
 // Log the initial state
 console.log(store.getState())
 
+var bunyan = require('bunyan');
+var log = bunyan.createLogger({name: 'logs'});
+log.info('hi');
+log.warn({lang: 'es'}, 'hola bunyan');
+
+
 ReactDOM.render(
   <Provider store={store}>
     <App />

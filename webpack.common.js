@@ -2,6 +2,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   module: {
+    noParse: [/dtrace-provider$/, /safe-json-stringify$/, /mv/],
     rules: [
       {
         test: /\.js$/,
@@ -24,6 +25,11 @@ module.exports = {
         ]
       }
     ]
+  },
+  node: {
+    fs: 'empty',
+    module: "empty",
+    "dtrace-provider": false
   },
   plugins: [
     new HtmlWebPackPlugin({
