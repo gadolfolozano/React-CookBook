@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { fetchCategories } from '../actions'
 import PropTypes from 'prop-types'
-import { Header, SearchBox, CategoryFilterList } from '../components'
+import { Header, SearchBox, CategoryFilterList, Login } from '../components'
 import Filters from './Filters'
 
 class App extends Component {
@@ -24,6 +24,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Login>oli</Login>
         <Header>Avantica CookBook pruebas (Mode: {process.env.NODE_ENV})</Header>
         <SearchBox/>
         {this.renderFilters()}
