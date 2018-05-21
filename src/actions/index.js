@@ -25,3 +25,5 @@ export const fetchCategories = () => dispatch => {
     .then(response => response.json())
     .then(json => dispatch(receiveCategories(json)))
 }
+
+export * from './LoginActions';

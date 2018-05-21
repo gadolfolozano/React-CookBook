@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { fetchCategories } from '../actions'
 import PropTypes from 'prop-types'
-import { Header, SearchBox, CategoryFilterList, Login } from '../components'
+import { Header, SearchBox, CategoryFilterList } from '../components'
 import Filters from './Filters'
+import Login from '../components/Login'
 
 class App extends Component {
 
