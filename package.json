@@ -32,9 +32,11 @@
   },
   "dependencies": {
     "bunyan": "^1.8.12",
+    "css-loader": "^0.28.11",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "style-loader": "^0.21.0"
   }
 }

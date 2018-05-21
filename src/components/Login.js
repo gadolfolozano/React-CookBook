@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { usernameChanged, passwordChanged, performLogin } from '../actions'
+import '../styles/main.css';
 
 class Login extends Component {
 
@@ -21,35 +22,27 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
-        <div >
-          <label><b>Username</b></label>
-          <input
-            type="text"
-            placeholder="Enter Username"
-            required
-            value = {this.props.username}
-            onChange = {this.onUsernameChange.bind(this)} />
+      <div className="container" >
+        <label><b>Username</b></label>
+        <input
+          type="text"
+          placeholder="Enter Username"
+          required
+          value = {this.props.username}
+          onChange = {this.onUsernameChange.bind(this)} />
 
-          <label><b>Password</b></label>
-          <input
-            type="password"
-            placeholder="Enter Password"
-            required
-            value = {this.props.password}
-            onChange = {this.onPasswordChange.bind(this)}  />
+        <label><b>Password</b></label>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          required
+          value = {this.props.password}
+          onChange = {this.onPasswordChange.bind(this)}  />
 
-          <button
-            type="submit"
-            onClick = {this.onButtonClick.bind(this)} >
-            Login
-          </button>
-        </div>
-
-        <div>
-          <button type="button">Cancel</button>
-          <span>Forgot <a href="#">password?</a></span>
-        </div>
+        <button
+          onClick = {this.onButtonClick.bind(this)} >
+          Login
+        </button>
       </div>
     );
   }
