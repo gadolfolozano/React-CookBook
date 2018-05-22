@@ -5,6 +5,8 @@ export const LOGIN_SUCCESS= 'LOGIN_SUCCESS'
 export const LOGIN_ERROR= 'LOGIN_ERROR'
 export const USERNAME_CHANGED= 'USERNAME_CHANGED'
 export const PASSWORD_CHANGED= 'PASSWORD_CHANGED'
+export const USERNAME_INPUT_ERROR= 'USERNAME_INPUT_ERROR'
+export const PASSWORD_INPUT_ERROR= 'PASSWORD_INPUT_ERROR'
 
 export const usernameChanged = (text) => ({
     type: USERNAME_CHANGED,
@@ -14,6 +16,14 @@ export const usernameChanged = (text) => ({
 export const passwordChanged = (text) => ({
     type: PASSWORD_CHANGED,
     payload: text
+})
+
+const usernameError = () => ({
+    type: USERNAME_INPUT_ERROR
+})
+
+const passwordError = () => ({
+    type: PASSWORD_INPUT_ERROR
 })
 
 const requestLogin = () => ({
@@ -31,7 +41,26 @@ const loginError = () => ({
   receivedAt: Date.now()
 })
 
-export const performLogin = (username, password) => dispatch => {
+export const login = (username, password) => dispatch => {
+  if(validateInputs(dispatch, username, password)){
+    dispatch(performLogin(username, password))
+  }
+}
+
+function validateInputs(dispatch, username, password) {
+  var validate = true
+  if(username === '' || username.length < 6){
+    dispatch(usernameError())
+    validate = false
+  }
+  if(password === '' || password.length < 6){
+    dispatch(passwordError())
+    validate = false
+  }
+  return validate;
+}
+
+const performLogin = (username, password) => dispatch => {
   dispatch(requestLogin())
   return fetch(BASE_API.concat(LOGIN), {
       method: 'POST',

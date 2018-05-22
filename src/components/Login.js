@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { usernameChanged, passwordChanged, performLogin } from '../actions'
+import { usernameChanged, passwordChanged, login } from '../actions'
 import '../styles/main.css';
 
 class Login extends Component {
@@ -16,8 +16,7 @@ class Login extends Component {
   onButtonClick(event) {
     event.preventDefault();
     const { username, password } = this.props;
-
-    this.props.performLogin(username, password);
+    this.props.login(username, password);
   }
 
   render() {
@@ -54,9 +53,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  usernameChanged: text => dispatch(usernameChanged(text)),
+  usernameChanged: text => dispatch(usernameChanged(text.trim())),
   passwordChanged: text => dispatch(passwordChanged(text)),
-  performLogin: (username, password) => dispatch(performLogin(username, password))
+  login: (username, password) => dispatch(login(username, password))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
