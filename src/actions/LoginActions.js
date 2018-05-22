@@ -1,4 +1,5 @@
 import { BASE_API, LOGIN } from '../config'
+import md5 from 'js-md5'
 
 export const REQUEST_LOGIN = 'REQUEST_LOGIN'
 export const LOGIN_SUCCESS= 'LOGIN_SUCCESS'
@@ -61,6 +62,7 @@ function validateInputs(dispatch, username, password) {
 }
 
 const performLogin = (username, password) => dispatch => {
+  const passwordEcrypted = md5(password)
   dispatch(requestLogin())
   return fetch(BASE_API.concat(LOGIN), {
       method: 'POST',
@@ -68,7 +70,7 @@ const performLogin = (username, password) => dispatch => {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({username, password})
+      body: JSON.stringify({username, password: passwordEcrypted})
     })
     .then(response => response.json())
     .then(json => {

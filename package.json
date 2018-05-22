@@ -33,6 +33,7 @@
   "dependencies": {
     "bunyan": "^1.8.12",
     "css-loader": "^0.28.11",
+    "js-md5": "^0.7.3",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",

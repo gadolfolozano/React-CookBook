@@ -23,6 +23,12 @@ button:hover {
   opacity: 0.8;
 }
 
+button:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 /* Extra styles for the cancel button */
 .cancelbtn {
   width: auto;
@@ -32,6 +38,14 @@ button:hover {
 
 .container {
   padding: 16px;
+}
+
+/* Set a style for all buttons */
+.errorText {
+  color: red;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
 }
 
 /*# sourceMappingURL=main.css.map */

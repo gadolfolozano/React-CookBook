@@ -4,7 +4,7 @@ import { fetchCategories } from '../actions'
 import PropTypes from 'prop-types'
 import { Header, SearchBox, CategoryFilterList } from '../components'
 import Filters from './Filters'
-import Login from '../components/Login'
+import LoginContainer from './LoginContainer'
 
 class App extends Component {
 
@@ -25,7 +25,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Login/>
+        <LoginContainer/>
         <Header>Avantica CookBook pruebas (Mode: {process.env.NODE_ENV})</Header>
         <SearchBox/>
         {this.renderFilters()}

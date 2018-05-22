@@ -1,5 +1,5 @@
 /* Full-width input fields */
-input[type=text], input[type=password] 
+input[type=text], input[type=password]
     width: 100%
     padding: 12px 20px
     margin: 8px 0
@@ -20,6 +20,11 @@ button
 button:hover
     opacity: 0.8
 
+button:disabled
+    opacity: 0.8
+    cursor: not-allowed
+    pointer-events: none
+
 /* Extra styles for the cancel button */
 .cancelbtn
     width: auto
@@ -28,3 +33,10 @@ button:hover
 
 .container
     padding: 16px
+
+/* Set a style for all buttons */
+.errorText
+    color: red
+    width: 100%
+    padding: 0px
+    margin: 0px
