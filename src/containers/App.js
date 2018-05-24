@@ -1,34 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { fetchCategories } from '../actions'
-import PropTypes from 'prop-types'
-import { Header, SearchBox, CategoryFilterList } from '../components'
 import Filters from './Filters'
 import LoginContainer from './LoginContainer'
 
 class App extends Component {
 
-  componentDidMount(){
-    const{ dispatch } = this.props
-    dispatch(fetchCategories())
-  }
+  renderApp(){
+    const { token } = this.props
 
-  renderFilters(){
-    const { categories } = this.props
-
-    if(categories.items.length == 0) {
-      return <p>Loading categories...</p>
+    if(token) {
+      //return <p>Loading app...</p>
+      return <Filters/>
     }
-    return <Filters/>
+    return <LoginContainer/>
   }
 
   render() {
     return (
       <div>
-        <LoginContainer/>
-        <Header>Avantica CookBook pruebas (Mode: {process.env.NODE_ENV})</Header>
-        <SearchBox/>
-        {this.renderFilters()}
+       {this.renderApp()}
       </div>
     );
   }
@@ -36,7 +26,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  categories: state.categories
+  token: state.auth.token
 })
 
 export default connect(mapStateToProps)(App)

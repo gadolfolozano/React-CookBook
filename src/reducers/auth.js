@@ -14,7 +14,8 @@ const INITIAL_STATE = {
   isFetching: false,
   usernameError: false,
   passwordError: false,
-  loginError: false
+  loginError: false,
+  token: sessionStorage.getItem('jwtToken')
 }
 
 const auth = (state = INITIAL_STATE, action) => {
@@ -26,7 +27,7 @@ const auth = (state = INITIAL_STATE, action) => {
     case REQUEST_LOGIN:
       return { ...state, isFetching: true, loginError: false };
     case LOGIN_SUCCESS:
-      return { ...state, ...INITIAL_STATE, user: action.user };
+      return { ...state, ...INITIAL_STATE, user: action.user, token: action.token };
     case LOGIN_ERROR:
       return { ...state, isFetching: false, loginError: true };
     case USERNAME_INPUT_ERROR:

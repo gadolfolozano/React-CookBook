@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { toggleCategory } from '../actions'
+import { toggleCategory, fetchCategories } from '../actions'
 import { CategoryFilterList } from '../components'
 
 const mapStateToProps = state => ({
@@ -7,7 +7,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  toggleCategory: id => dispatch(toggleCategory(id))
+  toggleCategory: id => dispatch(toggleCategory(id)),
+  fetchCategories: () => dispatch(fetchCategories())
 })
 
 export default connect(

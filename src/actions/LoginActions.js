@@ -31,9 +31,10 @@ const requestLogin = () => ({
   type: REQUEST_LOGIN
 })
 
-const loginSuccess = (user) => ({
+const loginSuccess = (json) => ({
   type: LOGIN_SUCCESS,
-  user: user,
+  user: json.user,
+  token: json.token,
   receivedAt: Date.now()
 })
 
@@ -77,7 +78,8 @@ const performLogin = (username, password) => dispatch => {
       if(json.error) {
         dispatch(loginError())
       } else {
-        dispatch(loginSuccess(json.user))
+        sessionStorage.setItem('jwtToken', json.token);
+        dispatch(loginSuccess(json))
       }
     })
 }
