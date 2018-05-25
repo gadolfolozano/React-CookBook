@@ -7,7 +7,7 @@ class Header extends Component {
 
     return (
         <header style={viewStyle}>
-          <h1 style={textStyle}>{this.props.children}</h1>
+          <h1 style={textStyle}>Holaaaaa</h1>
         </header>
     );
   }

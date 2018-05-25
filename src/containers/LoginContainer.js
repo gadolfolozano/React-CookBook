@@ -9,7 +9,9 @@ const mapStateToProps = state => ({
   password: state.auth.password,
   passwordError: state.auth.passwordError,
   loginError: state.auth.loginError,
-  isFetching: state.auth.isFetching
+  isFetching: state.auth.isFetching,
+  user: state.auth.user,
+  token: state.auth.token
 })
 
 const mapDispatchToProps = dispatch => ({

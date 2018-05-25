@@ -6,6 +6,7 @@ import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
+import { BrowserRouter } from 'react-router-dom';
 
 import {
     performLogin
@@ -30,7 +31,9 @@ log.info({intialState: store.getState()});
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>,
   document.getElementById('app')
 );

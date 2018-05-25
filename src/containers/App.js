@@ -1,32 +1,19 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
 import Filters from './Filters'
 import LoginContainer from './LoginContainer'
+import { withRouter, Link, Route, Switch } from 'react-router-dom';
 
 class App extends Component {
-
-  renderApp(){
-    const { token } = this.props
-
-    if(token) {
-      //return <p>Loading app...</p>
-      return <Filters/>
-    }
-    return <LoginContainer/>
-  }
 
   render() {
     return (
       <div>
-       {this.renderApp()}
+        <Route exact path="/" component={LoginContainer}/>
+        <Route path="/category" component={Filters}/>
       </div>
     );
   }
 
 }
 
-const mapStateToProps = state => ({
-  token: state.auth.token
-})
-
-export default connect(mapStateToProps)(App)
+export default withRouter(App)

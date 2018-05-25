@@ -24,6 +24,10 @@ class CategoryFilterList extends Component {
             onClick={() => this.props.toggleCategory(category.id)}
           />
         )}
+        <button
+          className="cancelbtn">
+          LogOut
+        </button>
       </div>
     )
   }

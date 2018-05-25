@@ -41,6 +41,13 @@ class Login extends Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot){
+    const { token, user, history } = this.props
+    if(token && user) {
+      history.push('/category')
+    }
+  }
+
   render() {
     return (
       <div className="container" >
