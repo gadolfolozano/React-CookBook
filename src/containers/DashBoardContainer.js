@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { toggleCategory, fetchCategories, logout } from '../actions'
-import { CategoryFilterList } from '../components'
+import { DashBoard } from '../components'
 
 const mapStateToProps = state => ({
   categories: state.categories.items,
@@ -16,4 +16,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CategoryFilterList)
+)(DashBoard)

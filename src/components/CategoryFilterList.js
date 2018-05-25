@@ -1,32 +1,10 @@
 import React, { Component } from 'react';
-import { CategoryFilter } from '../components';
 import PropTypes from 'prop-types'
+import { CategoryFilter } from '../components'
 
 class CategoryFilterList extends Component {
-
-  componentDidMount(){
-    this.props.fetchCategories();
-  }
-
-  onLogoutClick(event) {
-    event.preventDefault();
-    const { token } = this.props;
-    this.props.logout(token);
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot){
-    const { token, history } = this.props
-    if(!token) {
-      history.replace('/')
-    }
-  }
-
-  renderFilters(){
-    const { categories } = this.props
-
-    if(categories.length == 0) {
-      return <p>Loading categories...</p>
-    }
+  
+  render() {
     return (
       <div>
         {
@@ -37,19 +15,6 @@ class CategoryFilterList extends Component {
             onClick={() => this.props.toggleCategory(category.id)}
           />
         )}
-        <button
-          className="cancelbtn"
-          onClick = {this.onLogoutClick.bind(this)}>
-          LogOut
-        </button>
-      </div>
-    )
-  }
-
-  render() {
-    return (
-      <div>
-        {this.renderFilters()}
       </div>
     );
   }
@@ -61,9 +26,7 @@ CategoryFilterList.propTypes = {
     text: PropTypes.string.isRequired,
     selected: PropTypes.bool.isRequired
   }).isRequired).isRequired,
-  toggleCategory: PropTypes.func.isRequired,
-  fetchCategories: PropTypes.func.isRequired,
-  logout: PropTypes.func.isRequired
+  toggleCategory: PropTypes.func.isRequired
 }
 
-export { CategoryFilterList };
+export { CategoryFilterList }

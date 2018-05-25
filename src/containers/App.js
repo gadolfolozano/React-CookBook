@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Filters from './Filters'
+import DashBoardContainer from './DashBoardContainer'
 import LoginContainer from './LoginContainer'
 import { withRouter, Link, Route, Switch } from 'react-router-dom';
 
@@ -8,8 +8,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Route exact path="/" component={LoginContainer}/>
-        <Route path="/category" component={Filters}/>
+        <Route exact path="/" component={DashBoardContainer}/>
+        <Route path="/login" component={LoginContainer}/>
       </div>
     );
   }
