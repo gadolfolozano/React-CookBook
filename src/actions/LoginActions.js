@@ -1,6 +1,7 @@
-import { BASE_API, LOGIN } from '../config'
+import { BASE_API, LOGIN, LOGOUT } from '../config'
 import md5 from 'js-md5'
 
+//Login
 export const REQUEST_LOGIN = 'REQUEST_LOGIN'
 export const LOGIN_SUCCESS= 'LOGIN_SUCCESS'
 export const LOGIN_ERROR= 'LOGIN_ERROR'
@@ -8,6 +9,10 @@ export const USERNAME_CHANGED= 'USERNAME_CHANGED'
 export const PASSWORD_CHANGED= 'PASSWORD_CHANGED'
 export const USERNAME_INPUT_ERROR= 'USERNAME_INPUT_ERROR'
 export const PASSWORD_INPUT_ERROR= 'PASSWORD_INPUT_ERROR'
+//Logout
+export const REQUEST_LOGOUT = 'REQUEST_LOGOUT'
+export const LOGOUT_SUCCESS= 'LOGOUT_SUCCESS'
+export const LOGOUT_ERROR= 'LOGOUT_ERROR'
 
 export const usernameChanged = (text) => ({
     type: USERNAME_CHANGED,
@@ -83,3 +88,47 @@ const performLogin = (username, password) => dispatch => {
       }
     })
 }
+
+export const logout = (token) => dispatch => {
+  if(token){
+    dispatch(performLogout(token))
+  }else {
+    dispatch(logoutSuccess())
+  }
+}
+
+const performLogout = (token) => dispatch => {
+    dispatch(requestLogout())
+    return fetch(BASE_API.concat(LOGOUT), {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({token})
+    })
+    .then(response => response.json())
+    .then(json => {
+      sessionStorage.setItem('jwtToken', '');
+      if(json.error) {
+        dispatch(logoutError())
+      } else {
+        dispatch(logoutSuccess())
+      }
+    })
+}
+
+const requestLogout = () => ({
+  type: REQUEST_LOGOUT,
+  receivedAt: Date.now()
+})
+
+const logoutSuccess = () => ({
+  type: LOGOUT_SUCCESS,
+  receivedAt: Date.now()
+})
+
+const logoutError = () => ({
+  type: LOGOUT_ERROR,
+  receivedAt: Date.now()
+})

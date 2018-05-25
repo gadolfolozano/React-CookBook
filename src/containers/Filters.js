@@ -1,14 +1,16 @@
 import { connect } from 'react-redux'
-import { toggleCategory, fetchCategories } from '../actions'
+import { toggleCategory, fetchCategories, logout } from '../actions'
 import { CategoryFilterList } from '../components'
 
 const mapStateToProps = state => ({
-  categories: state.categories.items
+  categories: state.categories.items,
+  token: state.auth.token
 })
 
 const mapDispatchToProps = dispatch => ({
   toggleCategory: id => dispatch(toggleCategory(id)),
-  fetchCategories: () => dispatch(fetchCategories())
+  fetchCategories: () => dispatch(fetchCategories()),
+  logout: token => dispatch(logout(token))
 })
 
 export default connect(

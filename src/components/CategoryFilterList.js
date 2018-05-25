@@ -8,6 +8,19 @@ class CategoryFilterList extends Component {
     this.props.fetchCategories();
   }
 
+  onLogoutClick(event) {
+    event.preventDefault();
+    const { token } = this.props;
+    this.props.logout(token);
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot){
+    const { token, history } = this.props
+    if(!token) {
+      history.replace('/')
+    }
+  }
+
   renderFilters(){
     const { categories } = this.props
 
@@ -25,7 +38,8 @@ class CategoryFilterList extends Component {
           />
         )}
         <button
-          className="cancelbtn">
+          className="cancelbtn"
+          onClick = {this.onLogoutClick.bind(this)}>
           LogOut
         </button>
       </div>
@@ -48,7 +62,8 @@ CategoryFilterList.propTypes = {
     selected: PropTypes.bool.isRequired
   }).isRequired).isRequired,
   toggleCategory: PropTypes.func.isRequired,
-  fetchCategories: PropTypes.func.isRequired
+  fetchCategories: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired
 }
 
 export { CategoryFilterList };

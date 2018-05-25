@@ -5,7 +5,10 @@ import {
   USERNAME_CHANGED,
   PASSWORD_CHANGED,
   USERNAME_INPUT_ERROR,
-  PASSWORD_INPUT_ERROR
+  PASSWORD_INPUT_ERROR,
+  REQUEST_LOGOUT,
+  LOGOUT_SUCCESS,
+  LOGOUT_ERROR
 } from '../actions'
 
 const INITIAL_STATE = {
@@ -34,6 +37,11 @@ const auth = (state = INITIAL_STATE, action) => {
       return { ...state, usernameError: true, loginError: false };
     case PASSWORD_INPUT_ERROR:
       return { ...state, passwordError: true, loginError: false };
+    case REQUEST_LOGOUT:
+      return { ...state, isFetching: true, loginError: false };
+    case LOGOUT_SUCCESS:
+    case LOGOUT_ERROR:
+      return { ...state, ...INITIAL_STATE };
     default:
       return state;
   }
