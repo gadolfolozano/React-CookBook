@@ -90,6 +90,7 @@ const performLogin = (username, password) => dispatch => {
 }
 
 export const logout = (token) => dispatch => {
+  sessionStorage.setItem('jwtToken', '');
   if(token){
     dispatch(performLogout(token))
   }else {
@@ -109,7 +110,6 @@ const performLogout = (token) => dispatch => {
     })
     .then(response => response.json())
     .then(json => {
-      sessionStorage.setItem('jwtToken', '');
       if(json.error) {
         dispatch(logoutError())
       } else {

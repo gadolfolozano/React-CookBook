@@ -27,3 +27,4 @@ export const fetchCategories = () => dispatch => {
 }
 
 export * from './LoginActions';
+export * from './HomeActions';

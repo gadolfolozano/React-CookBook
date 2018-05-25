@@ -5,7 +5,12 @@ import PropTypes from 'prop-types'
 class DashBoard extends Component {
 
   componentDidMount(){
-    
+    const { token, history  } = this.props
+    if(!token) {
+      history.replace('/login')
+      return
+    }
+    this.props.getDashboard(token)
   }
 
   onLogoutClick(event) {

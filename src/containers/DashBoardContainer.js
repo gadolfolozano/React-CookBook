@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { toggleCategory, fetchCategories, logout } from '../actions'
+import { toggleCategory, fetchCategories, logout, getDashboard } from '../actions'
 import { DashBoard } from '../components'
 
 const mapStateToProps = state => ({
@@ -10,7 +10,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   toggleCategory: id => dispatch(toggleCategory(id)),
   fetchCategories: () => dispatch(fetchCategories()),
-  logout: token => dispatch(logout(token))
+  logout: token => dispatch(logout(token)),
+  getDashboard: token => dispatch(getDashboard(token))
 })
 
 export default connect(

@@ -41,7 +41,7 @@ const auth = (state = INITIAL_STATE, action) => {
       return { ...state, isFetching: true, loginError: false };
     case LOGOUT_SUCCESS:
     case LOGOUT_ERROR:
-      return { ...state, ...INITIAL_STATE };
+      return { ...state, ...INITIAL_STATE, token: ''};
     default:
       return state;
   }
