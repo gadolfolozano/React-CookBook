@@ -8,10 +8,6 @@ import { Provider } from 'react-redux'
 import reducer from './reducers'
 import { BrowserRouter } from 'react-router-dom';
 
-import {
-    performLogin
-} from './actions'
-
 const middleware = [ thunk ]
 if (process.env.NODE_ENV !== 'production') {
   middleware.push(createLogger())
@@ -21,8 +17,6 @@ const store = createStore(
   reducer,
   applyMiddleware(...middleware)
 )
-
-//store.dispatch(loginUser('gadolfolozano', 'e10adc3949ba59abbe56e057f20f883e'))
 
 // Log the initial state
 var bunyan = require('bunyan');

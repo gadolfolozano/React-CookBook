@@ -3,7 +3,8 @@ import { toggleCategory, fetchCategories, logout, getDashboard } from '../action
 import { DashBoard } from '../components'
 
 const mapStateToProps = state => ({
-  categories: state.categories.items,
+  categories: state.dashboard.categories,
+  //categories: state.categories.items,
   token: state.auth.token
 })
 
