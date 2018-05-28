@@ -4,7 +4,7 @@
   "description": "First you need to have install Nodejs then in the project directory run:",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --compilers js:babel-core/register",
     "build:prod": "webpack --config webpack.prod.js --mode production",
     "build:preprod": "webpack-dev-server --open --config webpack.prod.js --mode production",
     "build:dev": "webpack-dev-server --open --config webpack.dev.js --mode development"
@@ -34,6 +34,7 @@
     "bunyan": "^1.8.12",
     "css-loader": "^0.28.11",
     "js-md5": "^0.7.3",
+    "mocha": "^5.2.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "redux": "^4.0.0",
