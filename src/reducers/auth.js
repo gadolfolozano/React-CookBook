@@ -18,7 +18,15 @@ const INITIAL_STATE = {
   usernameError: false,
   passwordError: false,
   loginError: false,
-  token: sessionStorage.getItem('jwtToken')
+  token: getToken
+}
+
+const getToken = () => {
+  if(sessionStorage){
+    return sessionStorage.getItem('jwtToken')
+  } else {
+    return ''
+  }
 }
 
 const auth = (state = INITIAL_STATE, action) => {

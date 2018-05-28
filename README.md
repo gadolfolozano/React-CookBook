@@ -19,3 +19,9 @@ The base URL targets to  `http://localhost:3000/v1`,
 If you want to change that go to:
 
 ### `../src/config/index.js` and change `BASE_API`
+
+## Run unit tests
+
+run this command:
+
+### `npm run test`  
