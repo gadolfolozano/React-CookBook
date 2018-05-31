@@ -7,6 +7,7 @@ module.exports = {
     "document": true,
     "it": true,
     "describe": true,
+    "fetch": true,
   },
   rules:{
     "linebreak-style": 0,

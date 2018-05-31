@@ -10,6 +10,7 @@ const INITIAL_STATE = {
   recipes: [],
   isLoading: false,
   error: false,
+  mustShowCreateRecipe: false,
 };
 
 const toggleCategory = (items, id) =>

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { CategoryFilterList, RecipeList } from '../components';
+import { CategoryFilterList, RecipeList, CreateRecipe } from '../components';
+//import CreateRecipeContainer from '../containers/CreateRecipeContainer';
 
 class DashBoard extends Component {
   constructor(props) {
     super(props);
     this.onLogoutClick = this.onLogoutClick.bind(this);
+    this.onCreateRecipeClick = this.onCreateRecipeClick.bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +32,21 @@ class DashBoard extends Component {
     this.props.logout(token);
   }
 
+  onCreateRecipeClick(event) {
+    event.preventDefault();
+    this.props.showCreateRecipe();
+  }
+
+  renderCreateRecipe() {
+    const { mustShowCreateRecipe } = this.props;
+
+    if (mustShowCreateRecipe) {
+      return <CreateRecipe onCloseClicked={() => this.props.hideCreateRecipe()} />;
+      //return <CreateRecipeContainer />
+    }
+    return null;
+  }
+
   render() {
     return (
       <div>
@@ -48,6 +65,14 @@ class DashBoard extends Component {
         <RecipeList
           recipes={this.props.recipes}
         />
+
+        <button
+          onClick={this.onCreateRecipeClick}
+        >
+          Create Recipe
+        </button>
+
+        {this.renderCreateRecipe()}
       </div>
     );
   }
@@ -69,6 +94,9 @@ DashBoard.propTypes = {
   getDashboard: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   token: PropTypes.string,
+  showCreateRecipe: PropTypes.func.isRequired,
+  hideCreateRecipe: PropTypes.func.isRequired,
+  mustShowCreateRecipe: PropTypes.bool.isRequired,
 };
 
 DashBoard.defaultProps = {
