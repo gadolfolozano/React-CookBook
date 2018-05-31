@@ -1,45 +1,46 @@
-var assert = require('assert');
-import { createStore, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
-import reducer from '../src/reducers'
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import reducer from '../src/reducers';
 
-const middleware = [ thunk ]
+const assert = require('assert');
+
+const middleware = [thunk];
 const store = createStore(
   reducer,
-  applyMiddleware(...middleware)
-)
+  applyMiddleware(...middleware),
+);
 
 const initialState = store.getState();
 
-describe('initial state', function() {
-  describe('auth field', function() {
-    it('username should be empty', function() {
+describe('initial state', () => {
+  describe('auth field', () => {
+    it('username should be empty', () => {
       assert.equal(initialState.auth.username, '');
     });
-    it('password should be empty', function() {
+    it('password should be empty', () => {
       assert.equal(initialState.auth.password, '');
     });
-    it('isFetching should be false', function() {
+    it('isFetching should be false', () => {
       assert.equal(initialState.auth.isFetching, false);
     });
-    it('usernameError should be false', function() {
+    it('usernameError should be false', () => {
       assert.equal(initialState.auth.usernameError, false);
     });
-    it('passwordError should be false', function() {
+    it('passwordError should be false', () => {
       assert.equal(initialState.auth.passwordError, false);
     });
-    it('loginError should be false', function() {
+    it('loginError should be false', () => {
       assert.equal(initialState.auth.loginError, false);
     });
   });
-  describe('dashboard field', function() {
-    it('categories items should be empty', function() {
+  describe('dashboard field', () => {
+    it('categories items should be empty', () => {
       assert.equal(initialState.dashboard.categories.length, 0);
     });
-    it('isLoading should be false', function() {
+    it('isLoading should be false', () => {
       assert.equal(initialState.dashboard.isLoading, false);
     });
-    it('error should be false', function() {
+    it('error should be false', () => {
       assert.equal(initialState.dashboard.error, false);
     });
   });

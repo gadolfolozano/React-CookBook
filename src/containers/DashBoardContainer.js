@@ -4,6 +4,7 @@ import { DashBoard } from '../components';
 
 const mapStateToProps = state => ({
   categories: state.dashboard.categories,
+  recipes: state.dashboard.recipes,
   token: state.auth.token,
 });
 

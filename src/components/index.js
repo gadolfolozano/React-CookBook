@@ -4,3 +4,5 @@ export * from './DashBoard';
 export * from './CategoryFilter';
 export * from './CategoryFilterList';
 export * from './Login';
+export * from './RecipeItem';
+export * from './RecipeList';

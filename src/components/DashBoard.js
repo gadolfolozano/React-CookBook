@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { CategoryFilterList } from '../components';
+import { CategoryFilterList, RecipeList } from '../components';
 
 class DashBoard extends Component {
   constructor(props) {
@@ -30,17 +30,6 @@ class DashBoard extends Component {
     this.props.logout(token);
   }
 
-  renderFilters() {
-    const { categories } = this.props;
-
-    if (categories.length === 0) {
-      return <p>Loading categories...</p>;
-    }
-    return (
-      <div />
-    );
-  }
-
   render() {
     return (
       <div>
@@ -48,12 +37,17 @@ class DashBoard extends Component {
           categories={this.props.categories}
           toggleCategory={this.props.toggleCategory}
         />
+
         <button
           className="cancelbtn"
           onClick={this.onLogoutClick}
         >
           LogOut
         </button>
+
+        <RecipeList
+          recipes={this.props.recipes}
+        />
       </div>
     );
   }
@@ -64,6 +58,11 @@ DashBoard.propTypes = {
     id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     selected: PropTypes.bool.isRequired,
+  }).isRequired).isRequired,
+  recipes: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
   }).isRequired).isRequired,
   toggleCategory: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
