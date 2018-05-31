@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { CategoryFilterList } from '../components';
-import PropTypes from 'prop-types'
 
 class DashBoard extends Component {
+  constructor(props) {
+    super(props);
+    this.onLogoutClick = this.onLogoutClick.bind(this);
+  }
 
-  componentDidMount(){
-    const { token, history  } = this.props
-    if(!token) {
-      history.replace('/login')
-      return
+  componentDidMount() {
+    const { token, history } = this.props;
+    if (!token) {
+      history.replace('/login');
+      return;
     }
-    this.props.getDashboard(token)
+    this.props.getDashboard(token);
+  }
+
+  componentDidUpdate() {
+    const { token, history } = this.props;
+    if (!token) {
+      history.replace('/login');
+    }
   }
 
   onLogoutClick(event) {
@@ -19,25 +30,15 @@ class DashBoard extends Component {
     this.props.logout(token);
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot){
-    const { token, history } = this.props
-    if(!token) {
-      history.replace('/login')
-    }
-  }
+  renderFilters() {
+    const { categories } = this.props;
 
-  renderFilters(){
-    const { categories } = this.props
-
-    if(categories.length == 0) {
-      return <p>Loading categories...</p>
+    if (categories.length === 0) {
+      return <p>Loading categories...</p>;
     }
     return (
-      <div>
-
-
-      </div>
-    )
+      <div />
+    );
   }
 
   render() {
@@ -45,10 +46,12 @@ class DashBoard extends Component {
       <div>
         <CategoryFilterList
           categories={this.props.categories}
-          toggleCategory={this.props.toggleCategory}/>
+          toggleCategory={this.props.toggleCategory}
+        />
         <button
           className="cancelbtn"
-          onClick = {this.onLogoutClick.bind(this)}>
+          onClick={this.onLogoutClick}
+        >
           LogOut
         </button>
       </div>
@@ -60,10 +63,17 @@ DashBoard.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
-    selected: PropTypes.bool.isRequired
+    selected: PropTypes.bool.isRequired,
   }).isRequired).isRequired,
   toggleCategory: PropTypes.func.isRequired,
-  logout: PropTypes.func.isRequired
-}
+  logout: PropTypes.func.isRequired,
+  getDashboard: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  token: PropTypes.string,
+};
+
+DashBoard.defaultProps = {
+  token: '',
+};
 
 export { DashBoard };

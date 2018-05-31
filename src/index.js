@@ -1,27 +1,29 @@
+import { createStore, applyMiddleware } from 'redux';
+import { createLogger } from 'redux-logger';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import thunk from 'redux-thunk';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './containers/App';
-import { createStore, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
-import { createLogger } from 'redux-logger'
-import { Provider } from 'react-redux'
-import reducer from './reducers'
-import { BrowserRouter } from 'react-router-dom';
+import reducer from './reducers';
 
-const middleware = [ thunk ]
+const bunyan = require('bunyan');
+
+const middleware = [thunk];
+
 if (process.env.NODE_ENV !== 'production') {
-  middleware.push(createLogger())
+  middleware.push(createLogger());
 }
 
 const store = createStore(
   reducer,
-  applyMiddleware(...middleware)
-)
+  applyMiddleware(...middleware),
+);
 
 // Log the initial state
-var bunyan = require('bunyan');
-var log = bunyan.createLogger({name: 'logs'});
-log.info({intialState: store.getState()});
+const log = bunyan.createLogger({ name: 'logs' });
+log.info({ intialState: store.getState() });
 
 ReactDOM.render(
   <Provider store={store}>
@@ -29,5 +31,5 @@ ReactDOM.render(
       <App />
     </BrowserRouter>
   </Provider>,
-  document.getElementById('app')
+  document.getElementById('app'),
 );

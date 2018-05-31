@@ -1,19 +1,13 @@
-import React, { Component } from 'react';
-import DashBoardContainer from './DashBoardContainer'
-import LoginContainer from './LoginContainer'
-import { withRouter, Link, Route, Switch } from 'react-router-dom';
+import React from 'react';
+import { withRouter, Route } from 'react-router-dom';
+import DashBoardContainer from './DashBoardContainer';
+import LoginContainer from './LoginContainer';
 
-class App extends Component {
+const App = () => (
+  <div>
+    <Route exact path="/" component={DashBoardContainer} />
+    <Route path="/login" component={LoginContainer} />
+  </div>
+);
 
-  render() {
-    return (
-      <div>
-        <Route exact path="/" component={DashBoardContainer}/>
-        <Route path="/login" component={LoginContainer}/>
-      </div>
-    );
-  }
-
-}
-
-export default withRouter(App)
+export default withRouter(App);
