@@ -40,7 +40,14 @@ class DashBoard extends Component {
     const { mustShowCreateRecipe } = this.props;
 
     if (mustShowCreateRecipe) {
-      return <CreateRecipe onCloseClicked={() => this.props.hideCreateRecipe()} />;
+      return (
+        <CreateRecipe
+          onCloseClicked={() => this.props.hideCreateRecipe()}
+          recipeName={this.props.recipeName}
+          onRecipeNameChanged={this.props.recipeNameChanged}
+          recipeDescription={this.props.recipeDescription}
+          onRecipeDescriptionChanged={this.props.recipeDescriptionChanged}
+        />);
     }
     return null;
   }
@@ -95,6 +102,10 @@ DashBoard.propTypes = {
   showCreateRecipe: PropTypes.func.isRequired,
   hideCreateRecipe: PropTypes.func.isRequired,
   mustShowCreateRecipe: PropTypes.bool.isRequired,
+  recipeName: PropTypes.string.isRequired,
+  recipeDescription: PropTypes.string.isRequired,
+  recipeNameChanged: PropTypes.func.isRequired,
+  recipeDescriptionChanged: PropTypes.func.isRequired,
 };
 
 DashBoard.defaultProps = {
