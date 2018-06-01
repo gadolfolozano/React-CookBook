@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { CategoryFilterList, RecipeList, CreateRecipe } from '../components';
-//import CreateRecipeContainer from '../containers/CreateRecipeContainer';
 
 class DashBoard extends Component {
   constructor(props) {
@@ -42,7 +41,6 @@ class DashBoard extends Component {
 
     if (mustShowCreateRecipe) {
       return <CreateRecipe onCloseClicked={() => this.props.hideCreateRecipe()} />;
-      //return <CreateRecipeContainer />
     }
     return null;
   }
