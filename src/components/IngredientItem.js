@@ -6,6 +6,7 @@ const IngredientItem = props => (
     {props.text}
     <button
       className="cancelbtn"
+      onClick={props.onRemoveItem}
     >
     X
     </button>
@@ -14,6 +15,7 @@ const IngredientItem = props => (
 
 IngredientItem.propTypes = {
   text: PropTypes.string.isRequired,
+  onRemoveItem: PropTypes.func.isRequired,
 };
 
 export { IngredientItem };

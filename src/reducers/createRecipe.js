@@ -16,6 +16,16 @@ const INITIAL_STATE = {
   ingredients: [],
 };
 
+const removeItemFromArrayById = (items, id) => {
+  const result = [];
+  items.forEach((item) => {
+    if (item.id !== id) {
+      result.push(item);
+    }
+  });
+  return result;
+};
+
 const createRecipe = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SHOW_CREATE_RECIPE:
@@ -35,6 +45,10 @@ const createRecipe = (state = INITIAL_STATE, action) => {
         ingredients: [...state.ingredients, { id: action.id, name: action.payload }],
       };
     case REMOVE_INGREDIENT:
+      return {
+        ...state,
+        ingredients: removeItemFromArrayById(state.ingredients, action.id),
+      };
     default:
       return state;
   }

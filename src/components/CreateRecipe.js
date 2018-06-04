@@ -71,7 +71,10 @@ class CreateRecipe extends Component {
             Agregar ingrediente
           </button>
 
-          <IngredientList ingredients={this.props.ingredients} />
+          <IngredientList
+            ingredients={this.props.ingredients}
+            onRemoveItem={this.props.onRemoveItem}
+          />
 
           <button>
             Guardar

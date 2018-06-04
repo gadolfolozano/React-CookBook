@@ -9,6 +9,7 @@ const IngredientList = props => (
         (<IngredientItem
           key={ingredient.id}
           text={ingredient.name}
+          onRemoveItem={() => props.onRemoveItem(ingredient.id)}
         />))
     }
   </div>
