@@ -8,6 +8,9 @@ import {
   hideCreateRecipe,
   recipeNameChanged,
   recipeDescriptionChanged,
+  ingredientInputChanged,
+  addIngredient,
+  removeIngredient,
 } from '../actions';
 import { DashBoard } from '../components';
 
@@ -18,6 +21,8 @@ const mapStateToProps = state => ({
   token: state.auth.token,
   recipeName: state.createRecipe.recipeName,
   recipeDescription: state.createRecipe.recipeDescription,
+  ingredientInput: state.createRecipe.ingredientInput,
+  ingredients: state.createRecipe.ingredients,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -29,6 +34,9 @@ const mapDispatchToProps = dispatch => ({
   hideCreateRecipe: () => dispatch(hideCreateRecipe()),
   recipeNameChanged: text => dispatch(recipeNameChanged(text)),
   recipeDescriptionChanged: text => dispatch(recipeDescriptionChanged(text)),
+  ingredientInputChanged: text => dispatch(ingredientInputChanged(text)),
+  addIngredient: ingredientName => dispatch(addIngredient(ingredientName)),
+  removeIngredient: id => dispatch(removeIngredient(id)),
 });
 
 export default connect(

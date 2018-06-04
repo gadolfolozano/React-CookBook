@@ -7,3 +7,5 @@ export * from './Login';
 export * from './RecipeItem';
 export * from './RecipeList';
 export * from './CreateRecipe';
+export * from './IngredientItem';
+export * from './IngredientList';

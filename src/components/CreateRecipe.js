@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { IngredientList } from '../components';
 
 class CreateRecipe extends Component {
   constructor(props) {
     super(props);
     this.nameChanged = this.nameChanged.bind(this);
     this.descriptionChanged = this.descriptionChanged.bind(this);
+    this.ingredientNameChanged = this.ingredientNameChanged.bind(this);
+    this.addIngredientClick = this.addIngredientClick.bind(this);
   }
 
   nameChanged(event) {
@@ -16,13 +19,25 @@ class CreateRecipe extends Component {
     this.props.onRecipeDescriptionChanged(event.target.value);
   }
 
+  ingredientNameChanged(event) {
+    this.props.onIngredientNameChanged(event.target.value);
+  }
+
+  addIngredientClick(event) {
+    event.preventDefault();
+    const { ingredientName } = this.props;
+    if (ingredientName) {
+      this.props.onAddClick(ingredientName);
+    }
+  }
+
   render() {
     return (
       <div className="modal">
         <div className="modal-content" >
-          <label htmlFor="name"><b>Nombre del plato</b></label>
+          <label htmlFor="recipeName"><b>Nombre del plato</b></label>
           <input
-            id="name"
+            id="recipeName"
             type="text"
             placeholder="Ingresa un nombre"
             required
@@ -39,6 +54,24 @@ class CreateRecipe extends Component {
             value={this.props.recipeDescription}
             onChange={this.descriptionChanged}
           />
+
+          <label htmlFor="ingredients"><b>Ingredientes</b></label>
+          <input
+            id="ingredients"
+            type="text"
+            placeholder="Ingresa un nombre"
+            required
+            value={this.props.ingredientName}
+            onChange={this.ingredientNameChanged}
+          />
+
+          <button
+            onClick={this.addIngredientClick}
+          >
+            Agregar ingrediente
+          </button>
+
+          <IngredientList ingredients={this.props.ingredients} />
 
           <button>
             Guardar
@@ -63,6 +96,14 @@ CreateRecipe.propTypes = {
   recipeDescription: PropTypes.string.isRequired,
   onRecipeNameChanged: PropTypes.func.isRequired,
   onRecipeDescriptionChanged: PropTypes.func.isRequired,
+  ingredientName: PropTypes.string.isRequired,
+  onIngredientNameChanged: PropTypes.func.isRequired,
+  onAddClick: PropTypes.func.isRequired,
+  onRemoveItem: PropTypes.func.isRequired,
+  ingredients: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired).isRequired,
 };
 
 export { CreateRecipe };

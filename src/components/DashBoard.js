@@ -47,6 +47,11 @@ class DashBoard extends Component {
           onRecipeNameChanged={this.props.recipeNameChanged}
           recipeDescription={this.props.recipeDescription}
           onRecipeDescriptionChanged={this.props.recipeDescriptionChanged}
+          onIngredientNameChanged={this.props.ingredientInputChanged}
+          ingredientName={this.props.ingredientInput}
+          onAddClick={this.props.addIngredient}
+          onRemoveItem={this.props.removeIngredient}
+          ingredients={this.props.ingredients}
         />);
     }
     return null;
@@ -98,7 +103,7 @@ DashBoard.propTypes = {
   logout: PropTypes.func.isRequired,
   getDashboard: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  token: PropTypes.string,
+  token: PropTypes.string.isRequired,
   showCreateRecipe: PropTypes.func.isRequired,
   hideCreateRecipe: PropTypes.func.isRequired,
   mustShowCreateRecipe: PropTypes.bool.isRequired,
@@ -106,10 +111,14 @@ DashBoard.propTypes = {
   recipeDescription: PropTypes.string.isRequired,
   recipeNameChanged: PropTypes.func.isRequired,
   recipeDescriptionChanged: PropTypes.func.isRequired,
-};
-
-DashBoard.defaultProps = {
-  token: '',
+  ingredientInputChanged: PropTypes.func.isRequired,
+  ingredientInput: PropTypes.string.isRequired,
+  addIngredient: PropTypes.func.isRequired,
+  removeIngredient: PropTypes.func.isRequired,
+  ingredients: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired).isRequired,
 };
 
 export { DashBoard };
