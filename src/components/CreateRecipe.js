@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { MAX_INGREDIENTS } from '../config';
 import { IngredientList } from '../components';
 
 class CreateRecipe extends Component {
@@ -25,8 +26,8 @@ class CreateRecipe extends Component {
 
   addIngredientClick(event) {
     event.preventDefault();
-    const { ingredientName } = this.props;
-    if (ingredientName) {
+    const { ingredients, ingredientName } = this.props;
+    if (ingredients.length < MAX_INGREDIENTS && ingredientName) {
       this.props.onAddClick(ingredientName);
     }
   }

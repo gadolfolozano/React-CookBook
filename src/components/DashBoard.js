@@ -103,7 +103,7 @@ DashBoard.propTypes = {
   logout: PropTypes.func.isRequired,
   getDashboard: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  token: PropTypes.string.isRequired,
+  token: PropTypes.string,
   showCreateRecipe: PropTypes.func.isRequired,
   hideCreateRecipe: PropTypes.func.isRequired,
   mustShowCreateRecipe: PropTypes.bool.isRequired,
@@ -119,6 +119,10 @@ DashBoard.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired).isRequired,
+};
+
+DashBoard.defaultProps = {
+  token: '',
 };
 
 export { DashBoard };
