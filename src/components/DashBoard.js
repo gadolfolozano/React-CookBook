@@ -52,6 +52,9 @@ class DashBoard extends Component {
           onAddClick={this.props.addIngredient}
           onRemoveItem={this.props.removeIngredient}
           ingredients={this.props.ingredients}
+          isLoading={this.props.isLoading}
+          saveRecipe={this.props.saveRecipe}
+          token={this.props.token}
         />);
     }
     return null;
@@ -119,6 +122,8 @@ DashBoard.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired).isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  saveRecipe: PropTypes.func.isRequired,
 };
 
 DashBoard.defaultProps = {

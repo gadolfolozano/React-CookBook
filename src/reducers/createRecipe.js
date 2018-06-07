@@ -61,7 +61,7 @@ const createRecipe = (state = INITIAL_STATE, action) => {
     case SAVE_RECIPE_SUCCESS:
       return { ...state, ...INITIAL_STATE };
     case SAVE_RECIPE_ERROR:
-      return { ...state, error: 'Ocurrió un error' };
+      return { ...state, isLoading: false, error: 'Ocurrió un error' };
     default:
       return state;
   }

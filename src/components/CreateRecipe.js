@@ -10,6 +10,7 @@ class CreateRecipe extends Component {
     this.descriptionChanged = this.descriptionChanged.bind(this);
     this.ingredientNameChanged = this.ingredientNameChanged.bind(this);
     this.addIngredientClick = this.addIngredientClick.bind(this);
+    this.saveClicked = this.saveClicked.bind(this);
   }
 
   nameChanged(event) {
@@ -32,6 +33,17 @@ class CreateRecipe extends Component {
     }
   }
 
+  saveClicked(event) {
+    event.preventDefault();
+
+    const recipe = {
+      name: this.props.recipeName,
+      description: this.props.recipeDescription,
+    };
+
+    this.props.saveRecipe(this.props.token, recipe);
+  }
+
   render() {
     return (
       <div className="modal">
@@ -44,6 +56,7 @@ class CreateRecipe extends Component {
             required
             value={this.props.recipeName}
             onChange={this.nameChanged}
+            disabled={this.props.isLoading}
           />
 
           <label htmlFor="description"><b>Preparación</b></label>
@@ -54,6 +67,7 @@ class CreateRecipe extends Component {
             required
             value={this.props.recipeDescription}
             onChange={this.descriptionChanged}
+            disabled={this.props.isLoading}
           />
 
           <label htmlFor="ingredients"><b>Ingredientes</b></label>
@@ -64,10 +78,12 @@ class CreateRecipe extends Component {
             required
             value={this.props.ingredientName}
             onChange={this.ingredientNameChanged}
+            disabled={this.props.isLoading}
           />
 
           <button
             onClick={this.addIngredientClick}
+            disabled={this.props.isLoading}
           >
             Agregar ingrediente
           </button>
@@ -75,15 +91,20 @@ class CreateRecipe extends Component {
           <IngredientList
             ingredients={this.props.ingredients}
             onRemoveItem={this.props.onRemoveItem}
+            disabled={this.props.isLoading}
           />
 
-          <button>
+          <button
+            disabled={this.props.isLoading}
+            onClick={this.saveClicked}
+          >
             Guardar
           </button>
 
           <button
             className="cancelbtn"
             onClick={this.props.onCloseClicked}
+            disabled={this.props.isLoading}
           >
             Close
           </button>
@@ -108,6 +129,9 @@ CreateRecipe.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired).isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  saveRecipe: PropTypes.func.isRequired,
+  token: PropTypes.string.isRequired,
 };
 
 export { CreateRecipe };
