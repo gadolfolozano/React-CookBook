@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { MAX_INGREDIENTS } from '../config';
-import { IngredientList } from '../components';
+import { IngredientList, CategoryChooser } from '../components';
 
 class CreateRecipe extends Component {
   constructor(props) {
@@ -36,9 +36,16 @@ class CreateRecipe extends Component {
   saveClicked(event) {
     event.preventDefault();
 
+    const ingredients = [];
+    this.props.ingredients.forEach((item) => {
+      ingredients.push(item.name);
+    });
+
     const recipe = {
       name: this.props.recipeName,
       description: this.props.recipeDescription,
+      category: { id: this.props.categoryIdSelected },
+      ingredients,
     };
 
     this.props.saveRecipe(this.props.token, recipe);
@@ -68,6 +75,14 @@ class CreateRecipe extends Component {
             value={this.props.recipeDescription}
             onChange={this.descriptionChanged}
             disabled={this.props.isLoading}
+          />
+
+          Seleciona una categoria:
+          <br />
+          <CategoryChooser
+            categories={this.props.categories}
+            selectCategory={this.props.selectCategory}
+            categoryIdSelected={this.props.categoryIdSelected}
           />
 
           <label htmlFor="ingredients"><b>Ingredientes</b></label>
@@ -132,6 +147,12 @@ CreateRecipe.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   saveRecipe: PropTypes.func.isRequired,
   token: PropTypes.string.isRequired,
+  selectCategory: PropTypes.func.isRequired,
+  categoryIdSelected: PropTypes.string.isRequired,
+  categories: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+  }).isRequired).isRequired,
 };
 
 export { CreateRecipe };

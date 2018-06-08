@@ -55,6 +55,9 @@ class DashBoard extends Component {
           isLoading={this.props.isLoading}
           saveRecipe={this.props.saveRecipe}
           token={this.props.token}
+          selectCategory={this.props.selectCategory}
+          categoryIdSelected={this.props.categoryIdSelected}
+          categories={this.props.categories}
         />);
     }
     return null;
@@ -124,10 +127,13 @@ DashBoard.propTypes = {
   }).isRequired).isRequired,
   isLoading: PropTypes.bool.isRequired,
   saveRecipe: PropTypes.func.isRequired,
+  selectCategory: PropTypes.func.isRequired,
+  categoryIdSelected: PropTypes.string,
 };
 
 DashBoard.defaultProps = {
   token: '',
+  categoryIdSelected: '',
 };
 
 export { DashBoard };

@@ -9,6 +9,7 @@ import {
   REQUEST_SAVE_RECIPE,
   SAVE_RECIPE_SUCCESS,
   SAVE_RECIPE_ERROR,
+  SELECT_CATEGORY,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -19,6 +20,7 @@ const INITIAL_STATE = {
   ingredients: [],
   isLoading: false,
   error: '',
+  categoryIdSelected: '',
 };
 
 const removeItemFromArrayById = (items, id) => {
@@ -62,6 +64,8 @@ const createRecipe = (state = INITIAL_STATE, action) => {
       return { ...state, ...INITIAL_STATE };
     case SAVE_RECIPE_ERROR:
       return { ...state, isLoading: false, error: 'Ocurrió un error' };
+    case SELECT_CATEGORY:
+      return { ...state, categoryIdSelected: action.id };
     default:
       return state;
   }

@@ -10,6 +10,7 @@ export const REMOVE_INGREDIENT = 'REMOVE_INGREDIENT';
 export const REQUEST_SAVE_RECIPE = 'REQUEST_SAVE_RECIPE';
 export const SAVE_RECIPE_SUCCESS = 'SAVE_RECIPE_SUCCESS';
 export const SAVE_RECIPE_ERROR = 'SAVE_RECIPE_ERROR';
+export const SELECT_CATEGORY = 'SELECT_CATEGORY';
 
 const saveRecipeError = () => ({
   type: SAVE_RECIPE_ERROR,
@@ -88,4 +89,9 @@ export const addIngredient = (ingredientName) => {
 export const removeIngredient = id => ({
   type: REMOVE_INGREDIENT,
   id,
+});
+
+export const selectCategory = id => ({
+  type: SELECT_CATEGORY,
+  id
 });

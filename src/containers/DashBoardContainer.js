@@ -12,6 +12,7 @@ import {
   addIngredient,
   removeIngredient,
   saveRecipe,
+  selectCategory,
 } from '../actions';
 import { DashBoard } from '../components';
 
@@ -26,6 +27,7 @@ const mapStateToProps = state => ({
   ingredients: state.createRecipe.ingredients,
   isLoading: state.createRecipe.isLoading,
   createRecipeError: state.createRecipe.error,
+  categoryIdSelected: state.createRecipe.categoryIdSelected,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -41,6 +43,7 @@ const mapDispatchToProps = dispatch => ({
   addIngredient: ingredientName => dispatch(addIngredient(ingredientName)),
   removeIngredient: id => dispatch(removeIngredient(id)),
   saveRecipe: (token, recipe) => dispatch(saveRecipe(token, recipe)),
+  selectCategory: id => dispatch(selectCategory(id)),
 });
 
 export default connect(
