@@ -3,6 +3,7 @@ import {
   GET_DASHBOARD_SUCCESS,
   GET_DASHBOARD_ERROR,
   TOGGLE_CATEGORY,
+  SAVE_RECIPE_SUCCESS,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -57,6 +58,11 @@ const auth = (state = INITIAL_STATE, action) => {
       return { ...state, isLoading: false, error: true };
     case TOGGLE_CATEGORY:
       return { ...state, categories: toggleCategory(state.categories, action.id) };
+    case SAVE_RECIPE_SUCCESS:
+      return {
+        ...state,
+        recipes: [...state.recipes, action.response.recipe],
+      };
     default:
       return state;
   }

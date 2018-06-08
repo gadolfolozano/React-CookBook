@@ -93,5 +93,5 @@ export const removeIngredient = id => ({
 
 export const selectCategory = id => ({
   type: SELECT_CATEGORY,
-  id
+  id,
 });
