@@ -30,7 +30,13 @@ const parseCategories = (items) => {
 const parseRecipes = (items) => {
   const parsedArray = [];
   items.forEach((item) => {
-    parsedArray.push({ id: item.id, name: item.name, description: item.description });
+    parsedArray.push({
+      id: item.id,
+      name: item.name,
+      description: item.description,
+      ingredients: item.ingredients,
+      category: item.category,
+    });
   });
   return parsedArray;
 };
