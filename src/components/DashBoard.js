@@ -80,6 +80,8 @@ class DashBoard extends Component {
 
         <RecipeList
           recipes={this.props.recipes}
+          removeRecipe={this.props.removeRecipe}
+          token={this.props.token}
         />
 
         <button
@@ -129,6 +131,7 @@ DashBoard.propTypes = {
   saveRecipe: PropTypes.func.isRequired,
   selectCategory: PropTypes.func.isRequired,
   categoryIdSelected: PropTypes.string,
+  removeRecipe: PropTypes.func.isRequired,
 };
 
 DashBoard.defaultProps = {

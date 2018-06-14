@@ -24,6 +24,7 @@ const RecipeItem = props => (
 
     <button
       className="cancelbtn"
+      onClick={props.removeRecipe}
     >
       Delete
     </button>
@@ -41,6 +42,7 @@ RecipeItem.propTypes = {
       name: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+  removeRecipe: PropTypes.func.isRequired,
 };
 
 export { RecipeItem };

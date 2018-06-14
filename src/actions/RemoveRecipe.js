@@ -17,7 +17,7 @@ const requestRemoveRecipe = () => ({
   type: REQUEST_REMOVE_RECIPE,
 });
 
-const performRemoveRecipe = (token, recipe) => (dispatch) => {
+const performRemoveRecipe = (token, recipeId) => (dispatch) => {
   dispatch(requestRemoveRecipe());
   return fetch(BASE_API.concat(REMOVE_RECIPE), {
     method: 'DELETE',
@@ -25,7 +25,7 @@ const performRemoveRecipe = (token, recipe) => (dispatch) => {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ token, recipe }),
+    body: JSON.stringify({ token, recipe: { id: recipeId } }),
   })
     .then(response => response.json())
     .then((json) => {
@@ -37,9 +37,9 @@ const performRemoveRecipe = (token, recipe) => (dispatch) => {
     });
 };
 
-export const removeRecipe = (token, recipe) => (dispatch) => {
-  if (token && recipe) {
-    dispatch(performRemoveRecipe(token, recipe));
+export const removeRecipe = (token, recipeId) => (dispatch) => {
+  if (token && recipeId) {
+    dispatch(performRemoveRecipe(token, recipeId));
   } else {
     dispatch(removeRecipeError());
   }

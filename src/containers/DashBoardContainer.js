@@ -13,6 +13,7 @@ import {
   removeIngredient,
   saveRecipe,
   selectCategory,
+  removeRecipe,
 } from '../actions';
 import { DashBoard } from '../components';
 
@@ -44,6 +45,7 @@ const mapDispatchToProps = dispatch => ({
   removeIngredient: id => dispatch(removeIngredient(id)),
   saveRecipe: (token, recipe) => dispatch(saveRecipe(token, recipe)),
   selectCategory: id => dispatch(selectCategory(id)),
+  removeRecipe: (token, recipeId) => dispatch(removeRecipe(token, recipeId)),
 });
 
 export default connect(

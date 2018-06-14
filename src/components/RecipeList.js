@@ -9,6 +9,7 @@ const RecipeList = props => (
         <RecipeItem
           key={recipe.id}
           recipe={recipe}
+          removeRecipe={() => props.removeRecipe(props.token, recipe.id)}
         />
       ))
     }

@@ -4,6 +4,7 @@ import {
   GET_DASHBOARD_ERROR,
   TOGGLE_CATEGORY,
   SAVE_RECIPE_SUCCESS,
+  REMOVE_RECIPE_SUCCESS,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -42,6 +43,16 @@ const parseRecipes = (items) => {
   return parsedArray;
 };
 
+const removeItemFromArrayById = (items, id) => {
+  const result = [];
+  items.forEach((item) => {
+    if (item.id !== id) {
+      result.push(item);
+    }
+  });
+  return result;
+};
+
 const auth = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case REQUEST_GET_DASHBOARD:
@@ -62,6 +73,11 @@ const auth = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         recipes: [...state.recipes, action.response.recipe],
+      };
+    case REMOVE_RECIPE_SUCCESS:
+      return {
+        ...state,
+        recipes: removeItemFromArrayById(state.recipes, action.response.removedId),
       };
     default:
       return state;
