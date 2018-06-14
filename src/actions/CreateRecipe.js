@@ -76,7 +76,7 @@ export const ingredientInputChanged = text => ({
   payload: text,
 });
 
-let nextIngredientId = 0;
+let nextIngredientId = 10;
 export const addIngredient = (ingredientName) => {
   nextIngredientId += 1;
   return {

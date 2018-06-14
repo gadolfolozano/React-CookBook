@@ -53,6 +53,23 @@ const removeItemFromArrayById = (items, id) => {
   return result;
 };
 
+const updateRecipes = (recipes, recipe) => {
+  const result = [];
+  let found = false;
+  recipes.forEach((item) => {
+    if (item.id === recipe.id) {
+      result.push(recipe);
+      found = true;
+    } else {
+      result.push(item);
+    }
+  });
+  if (!found) {
+    result.push(recipe);
+  }
+  return result;
+};
+
 const auth = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case REQUEST_GET_DASHBOARD:
@@ -72,7 +89,7 @@ const auth = (state = INITIAL_STATE, action) => {
     case SAVE_RECIPE_SUCCESS:
       return {
         ...state,
-        recipes: [...state.recipes, action.response.recipe],
+        recipes: updateRecipes(state.recipes, action.response.recipe),
       };
     case REMOVE_RECIPE_SUCCESS:
       return {

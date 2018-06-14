@@ -10,6 +10,7 @@ import {
   SAVE_RECIPE_SUCCESS,
   SAVE_RECIPE_ERROR,
   SELECT_CATEGORY,
+  SHOW_EDIT_RECIPE,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -21,6 +22,7 @@ const INITIAL_STATE = {
   isLoading: false,
   error: '',
   categoryIdSelected: '',
+  recipeId: '',
 };
 
 const removeItemFromArrayById = (items, id) => {
@@ -33,10 +35,23 @@ const removeItemFromArrayById = (items, id) => {
   return result;
 };
 
+const parseIngredients = (ingredients) => {
+  const parsedArray = [];
+  ingredients.forEach((ingredient, index) => {
+    parsedArray.push({ id: index, name: ingredient });
+  });
+  return parsedArray;
+};
+
 const createRecipe = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SHOW_CREATE_RECIPE:
-      return { ...state, mustShowCreateRecipe: true, error: '' };
+      return {
+        ...state,
+        mustShowCreateRecipe: true,
+        error: '',
+        recipeId: '',
+      };
     case HIDE_CREATE_RECIPE:
       return { ...state, mustShowCreateRecipe: false, error: '' };
     case RECIPE_NAME_CHANGED:
@@ -66,6 +81,18 @@ const createRecipe = (state = INITIAL_STATE, action) => {
       return { ...state, isLoading: false, error: 'Ocurrió un error' };
     case SELECT_CATEGORY:
       return { ...state, categoryIdSelected: action.id };
+    case SHOW_EDIT_RECIPE:
+      return {
+        ...state,
+        mustShowCreateRecipe: true,
+        error: '',
+        recipeId: action.recipe.id,
+        recipeName: action.recipe.name,
+        recipeDescription: action.recipe.description,
+        ingredientInput: '',
+        ingredients: parseIngredients(action.recipe.ingredients),
+        categoryIdSelected: action.recipe.category.id,
+      };
     default:
       return state;
   }

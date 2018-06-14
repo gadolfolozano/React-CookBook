@@ -42,6 +42,7 @@ class CreateRecipe extends Component {
     });
 
     const recipe = {
+      id: this.props.recipeId,
       name: this.props.recipeName,
       description: this.props.recipeDescription,
       category: { id: this.props.categoryIdSelected },
@@ -153,6 +154,7 @@ CreateRecipe.propTypes = {
     id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
   }).isRequired).isRequired,
+  recipeId: PropTypes.string.isRequired,
 };
 
 export { CreateRecipe };

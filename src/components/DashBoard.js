@@ -58,6 +58,7 @@ class DashBoard extends Component {
           selectCategory={this.props.selectCategory}
           categoryIdSelected={this.props.categoryIdSelected}
           categories={this.props.categories}
+          recipeId={this.props.recipeId}
         />);
     }
     return null;
@@ -81,6 +82,7 @@ class DashBoard extends Component {
         <RecipeList
           recipes={this.props.recipes}
           removeRecipe={this.props.removeRecipe}
+          showEditRecipe={this.props.showEditRecipe}
           token={this.props.token}
         />
 
@@ -132,6 +134,8 @@ DashBoard.propTypes = {
   selectCategory: PropTypes.func.isRequired,
   categoryIdSelected: PropTypes.string,
   removeRecipe: PropTypes.func.isRequired,
+  showEditRecipe: PropTypes.func.isRequired,
+  recipeId: PropTypes.string.isRequired,
 };
 
 DashBoard.defaultProps = {

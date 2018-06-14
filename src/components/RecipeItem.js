@@ -18,7 +18,9 @@ const RecipeItem = props => (
           </b>))
       }
     </p>
-    <button>
+    <button
+      onClick={props.showEditRecipe}
+    >
       Edit
     </button>
 
@@ -43,6 +45,7 @@ RecipeItem.propTypes = {
     }).isRequired,
   }).isRequired,
   removeRecipe: PropTypes.func.isRequired,
+  showEditRecipe: PropTypes.func.isRequired,
 };
 
 export { RecipeItem };
