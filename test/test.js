@@ -1,6 +1,23 @@
 import { createStore, applyMiddleware } from 'redux';
+import React from 'react';
+import { expect } from 'chai';
+import { configure, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import { spy } from 'sinon';
 import thunk from 'redux-thunk';
+import { Header } from '../src/components';
 import reducer from '../src/reducers';
+
+configure({ adapter: new Adapter() });
+
+spy(Header.prototype, 'componentDidMount');
+
+describe('<Foo />', () => {
+  it('calls componentDidMount', () => {
+    const wrapper = mount(<Header />);
+    expect(Header.prototype.componentDidMount.calledOnce).to.equal(true);
+  });
+});
 
 const assert = require('assert');
 
