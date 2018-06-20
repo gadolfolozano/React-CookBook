@@ -1,7 +1,5 @@
 import { connect } from 'react-redux';
 import {
-  toggleCategory,
-  fetchCategories,
   logout,
   getDashboard,
   showCreateRecipe,
@@ -34,8 +32,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  toggleCategory: id => dispatch(toggleCategory(id)),
-  fetchCategories: () => dispatch(fetchCategories()),
   logout: token => dispatch(logout(token)),
   getDashboard: token => dispatch(getDashboard(token)),
   showCreateRecipe: () => dispatch(showCreateRecipe()),

@@ -53,7 +53,7 @@ const createRecipe = (state = INITIAL_STATE, action) => {
         recipeId: '',
       };
     case HIDE_CREATE_RECIPE:
-      return { ...state, mustShowCreateRecipe: false, error: '' };
+      return { ...state, ...INITIAL_STATE };
     case RECIPE_NAME_CHANGED:
       return { ...state, recipeName: action.payload, error: '' };
     case RECIPE_DESCRIPTION_CHANGED:

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { CategoryFilterList, RecipeList, CreateRecipe } from '../components';
+import { RecipeList, CreateRecipe } from '../components';
 
 class DashBoard extends Component {
   constructor(props) {
@@ -67,10 +67,6 @@ class DashBoard extends Component {
   render() {
     return (
       <div>
-        <CategoryFilterList
-          categories={this.props.categories}
-          toggleCategory={this.props.toggleCategory}
-        />
 
         <button
           className="cancelbtn"
@@ -109,7 +105,6 @@ DashBoard.propTypes = {
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
   }).isRequired).isRequired,
-  toggleCategory: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   getDashboard: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
