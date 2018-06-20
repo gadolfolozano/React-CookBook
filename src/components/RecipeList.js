@@ -4,6 +4,7 @@ import { RecipeItem } from '../components';
 
 const RecipeList = props => (
   <div>
+    <div className="unique" />
     {
       props.recipes.map(recipe => (
         <RecipeItem

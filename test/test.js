@@ -5,17 +5,44 @@ import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { spy } from 'sinon';
 import thunk from 'redux-thunk';
-import { Header } from '../src/components';
+import { Header, Login, RecipeList, RecipeItem } from '../src/components';
 import reducer from '../src/reducers';
 
 configure({ adapter: new Adapter() });
 
 spy(Header.prototype, 'componentDidMount');
+spy(Login.prototype, 'componentDidMount');
 
 describe('<Foo />', () => {
   it('calls componentDidMount', () => {
-    const wrapper = mount(<Header />);
+    mount(<Header />);
     expect(Header.prototype.componentDidMount.calledOnce).to.equal(true);
+  });
+});
+
+describe('<Login />', () => {
+  it('calls renderErrorPassword', () => {
+    const wrapper = mount(<Login />);
+    expect(Login.prototype.componentDidMount.calledOnce).to.equal(true);
+  });
+});
+
+describe('<RecipeList />', () => {
+  it('check div is on this component', () => {
+    const recipesObj = [
+      {
+        id: '001',
+        name: 'name',
+        description: 'description',
+        ingredients: ['ingr1', 'ingr2'],
+        category: {
+          id: '901',
+          name: 'deserts',
+        },
+      },
+    ];
+    const wrapper = mount(<RecipeList recipes={recipesObj} />);
+    expect(wrapper.contains(<div className="unique" />)).to.equal(true);
   });
 });
 

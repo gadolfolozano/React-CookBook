@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import '../styles/main.css';
 
 class Login extends Component {
+  componentDidMount() {
+
+  }
 
   onUsernameChange(event) {
     this.props.usernameChanged(event.target.value.trim());
