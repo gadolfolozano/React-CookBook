@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import {
+  hideCreateRecipe,
+  recipeNameChanged,
+  recipeDescriptionChanged,
+  ingredientInputChanged,
+  addIngredient,
+  removeIngredient,
+  saveRecipe,
+  selectCategory,
+  removeRecipe,
+} from '../actions';
 import { MAX_INGREDIENTS } from '../config';
 import { IngredientList, CategoryChooser } from '../components';
 
-class CreateRecipe extends Component {
+class CreateUpdateRecipe extends Component {
   constructor(props) {
     super(props);
     this.nameChanged = this.nameChanged.bind(this);
@@ -14,22 +26,22 @@ class CreateRecipe extends Component {
   }
 
   nameChanged(event) {
-    this.props.onRecipeNameChanged(event.target.value);
+    this.props.recipeNameChanged(event.target.value);
   }
 
   descriptionChanged(event) {
-    this.props.onRecipeDescriptionChanged(event.target.value);
+    this.props.recipeDescriptionChanged(event.target.value);
   }
 
   ingredientNameChanged(event) {
-    this.props.onIngredientNameChanged(event.target.value);
+    this.props.ingredientInputChanged(event.target.value);
   }
 
   addIngredientClick(event) {
     event.preventDefault();
-    const { ingredients, ingredientName } = this.props;
-    if (ingredients.length < MAX_INGREDIENTS && ingredientName) {
-      this.props.onAddClick(ingredientName);
+    const { ingredients, ingredientInput } = this.props;
+    if (ingredients.length < MAX_INGREDIENTS && ingredientInput) {
+      this.props.addIngredient(ingredientInput);
     }
   }
 
@@ -92,7 +104,7 @@ class CreateRecipe extends Component {
             type="text"
             placeholder="Ingresa un nombre"
             required
-            value={this.props.ingredientName}
+            value={this.props.ingredientInput}
             onChange={this.ingredientNameChanged}
             disabled={this.props.isLoading}
           />
@@ -106,7 +118,7 @@ class CreateRecipe extends Component {
 
           <IngredientList
             ingredients={this.props.ingredients}
-            onRemoveItem={this.props.onRemoveItem}
+            onRemoveItem={this.props.removeIngredient}
             disabled={this.props.isLoading}
           />
 
@@ -119,7 +131,7 @@ class CreateRecipe extends Component {
 
           <button
             className="cancelbtn"
-            onClick={this.props.onCloseClicked}
+            onClick={this.props.hideCreateRecipe}
             disabled={this.props.isLoading}
           >
             Close
@@ -131,16 +143,16 @@ class CreateRecipe extends Component {
   }
 }
 
-CreateRecipe.propTypes = {
-  onCloseClicked: PropTypes.func.isRequired,
+CreateUpdateRecipe.propTypes = {
+  hideCreateRecipe: PropTypes.func.isRequired,
   recipeName: PropTypes.string.isRequired,
   recipeDescription: PropTypes.string.isRequired,
-  onRecipeNameChanged: PropTypes.func.isRequired,
-  onRecipeDescriptionChanged: PropTypes.func.isRequired,
-  ingredientName: PropTypes.string.isRequired,
-  onIngredientNameChanged: PropTypes.func.isRequired,
-  onAddClick: PropTypes.func.isRequired,
-  onRemoveItem: PropTypes.func.isRequired,
+  recipeNameChanged: PropTypes.func.isRequired,
+  recipeDescriptionChanged: PropTypes.func.isRequired,
+  ingredientInput: PropTypes.string.isRequired,
+  ingredientInputChanged: PropTypes.func.isRequired,
+  addIngredient: PropTypes.func.isRequired,
+  removeIngredient: PropTypes.func.isRequired,
   ingredients: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -157,4 +169,33 @@ CreateRecipe.propTypes = {
   recipeId: PropTypes.string.isRequired,
 };
 
-export { CreateRecipe };
+const mapStateToProps = state => ({
+  categories: state.dashboard.categories,
+  mustShowCreateRecipe: state.createRecipe.mustShowCreateRecipe,
+  token: state.auth.token,
+  recipeName: state.createRecipe.recipeName,
+  recipeDescription: state.createRecipe.recipeDescription,
+  ingredientInput: state.createRecipe.ingredientInput,
+  ingredients: state.createRecipe.ingredients,
+  isLoading: state.createRecipe.isLoading,
+  createRecipeError: state.createRecipe.error,
+  categoryIdSelected: state.createRecipe.categoryIdSelected,
+  recipeId: state.createRecipe.recipeId,
+});
+
+const mapDispatchToProps = dispatch => ({
+  hideCreateRecipe: () => dispatch(hideCreateRecipe()),
+  recipeNameChanged: text => dispatch(recipeNameChanged(text)),
+  recipeDescriptionChanged: text => dispatch(recipeDescriptionChanged(text)),
+  ingredientInputChanged: text => dispatch(ingredientInputChanged(text)),
+  addIngredient: ingredientName => dispatch(addIngredient(ingredientName)),
+  removeIngredient: id => dispatch(removeIngredient(id)),
+  saveRecipe: (token, recipe) => dispatch(saveRecipe(token, recipe)),
+  selectCategory: id => dispatch(selectCategory(id)),
+  removeRecipe: (token, recipeId) => dispatch(removeRecipe(token, recipeId)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CreateUpdateRecipe);
