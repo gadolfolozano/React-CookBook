@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { RecipeList } from '../components';
-import CreateUpdateRecipeContainer from '../containers/CreateUpdateRecipeContainer';
+import Input from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { Route } from 'react-router-dom';
+import SearchResultContainer from '../containers/SearchResultContainer';
+import HomeContainer from '../containers/HomeContainer';
 
 class DashBoard extends Component {
   constructor(props) {
     super(props);
+    this.searchInputChanged = this.searchInputChanged.bind(this);
     this.onLogoutClick = this.onLogoutClick.bind(this);
-    this.onCreateRecipeClick = this.onCreateRecipeClick.bind(this);
+    this.onSearchClick = this.onSearchClick.bind(this);
   }
 
   componentDidMount() {
@@ -32,20 +36,14 @@ class DashBoard extends Component {
     this.props.logout(token);
   }
 
-  onCreateRecipeClick(event) {
+  onSearchClick(event) {
     event.preventDefault();
-    this.props.showCreateRecipe();
+    const { history, match, searchInput } = this.props;
+    history.push(`${match.url}/search/${searchInput}`);
   }
 
-  renderCreateRecipe() {
-    const { mustShowCreateRecipe } = this.props;
-
-    if (mustShowCreateRecipe) {
-      return (
-        <CreateUpdateRecipeContainer />
-      );
-    }
-    return null;
+  searchInputChanged(event) {
+    this.props.searchInputChanged(event.target.value);
   }
 
   render() {
@@ -59,39 +57,41 @@ class DashBoard extends Component {
           LogOut
         </button>
 
-        <RecipeList
-          recipes={this.props.recipes}
-          removeRecipe={this.props.removeRecipe}
-          showEditRecipe={this.props.showEditRecipe}
-          token={this.props.token}
+        <Input
+          id="search"
+          margin="normal"
+          placeholder="Buscar"
+          value={this.props.searchInput}
+          onChange={this.searchInputChanged}
         />
 
-        <button
-          onClick={this.onCreateRecipeClick}
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={this.onSearchClick}
         >
-          Create Recipe
-        </button>
+          Buscar
+        </Button>
 
-        {this.renderCreateRecipe()}
+        <div>
+          <Route exact path={this.props.match.url} component={HomeContainer} />
+          <Route exact path={`${this.props.match.url}/search/:query`} component={SearchResultContainer} />
+        </div>
       </div>
     );
   }
 }
 
 DashBoard.propTypes = {
-  recipes: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-  }).isRequired).isRequired,
   logout: PropTypes.func.isRequired,
   getDashboard: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   token: PropTypes.string,
-  showCreateRecipe: PropTypes.func.isRequired,
-  mustShowCreateRecipe: PropTypes.bool.isRequired,
-  removeRecipe: PropTypes.func.isRequired,
-  showEditRecipe: PropTypes.func.isRequired,
+  searchInputChanged: PropTypes.func.isRequired,
+  searchInput: PropTypes.string.isRequired,
+  match: PropTypes.shape({
+    url: PropTypes.string,
+  }).isRequired,
 };
 
 DashBoard.defaultProps = {

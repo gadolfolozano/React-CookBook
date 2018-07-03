@@ -3,3 +3,4 @@ export * from './HomeActions';
 export * from './CreateRecipe';
 export * from './RemoveRecipe';
 export * from './EditRecipe';
+export * from './SearchRecipe';

@@ -6,6 +6,7 @@ export const LOGOUT = '/logout';
 export const GET_DASHBOARD = '/getDashboard';
 export const SAVE_RECIPE = '/recipe';
 export const REMOVE_RECIPE = '/recipe';
+export const SEARCH_RECIPE = '/search';
 
 
 export const MAX_INGREDIENTS = 5;

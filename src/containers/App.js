@@ -5,7 +5,7 @@ import LoginContainer from './LoginContainer';
 
 const App = () => (
   <div>
-    <Route exact path="/" component={DashBoardContainer} />
+    <Route path="/home" component={DashBoardContainer} />
     <Route path="/login" component={LoginContainer} />
   </div>
 );

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 import '../styles/main.css';
 
 class Login extends Component {
@@ -47,15 +49,15 @@ class Login extends Component {
   componentDidUpdate(prevProps, prevState, snapshot){
     const { token, user, history } = this.props
     if(token && user) {
-      history.replace('/')
+      history.replace('/home')
     }
   }
 
   render() {
     return (
       <div className="container" >
-        <label><b>Username</b></label>
-        <input
+        <TextField
+          label="Username"
           type="text"
           placeholder="Enter Username"
           required
@@ -63,9 +65,10 @@ class Login extends Component {
           disabled={this.props.isFetching}
           onChange = {this.onUsernameChange.bind(this)} />
         {this.renderErrorUsername()}
+        <br />
 
-        <label><b>Password</b></label>
-        <input
+        <TextField
+          label="Password"
           type="password"
           placeholder="Enter Password"
           required
@@ -74,11 +77,15 @@ class Login extends Component {
           onChange = {this.onPasswordChange.bind(this)}  />
         {this.renderErrorPassword()}
 
-        <button
+        <br />
+        <br />
+        <Button
+          variant="contained"
+          color="primary"
           disabled={this.props.isFetching}
           onClick = {this.onButtonClick.bind(this)} >
           Login
-        </button>
+        </Button>
         {this.renderErrorLogin()}
 
       </div>
