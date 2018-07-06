@@ -24,8 +24,9 @@ const performRemoveRecipe = (token, recipeId) => (dispatch) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      token,
     },
-    body: JSON.stringify({ token, recipe: { id: recipeId } }),
+    body: JSON.stringify({ recipe: { id: recipeId } }),
   })
     .then(response => response.json())
     .then((json) => {

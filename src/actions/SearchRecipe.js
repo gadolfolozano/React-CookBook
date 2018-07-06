@@ -26,13 +26,13 @@ const requestSearchRecipe = () => ({
 
 const performSearchRecipe = (token, name) => (dispatch) => {
   dispatch(requestSearchRecipe());
-  return fetch(BASE_API.concat(SEARCH_RECIPE), {
-    method: 'POST',
+  return fetch(`${BASE_API}${SEARCH_RECIPE}/?value=${name}`, {
+    method: 'GET',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      token,
     },
-    body: JSON.stringify({ token, name }),
   })
     .then(response => response.json())
     .then((json) => {

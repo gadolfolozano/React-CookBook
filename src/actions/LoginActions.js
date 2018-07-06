@@ -105,8 +105,9 @@ const performLogout = (token) => dispatch => {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
+        token,
       },
-      body: JSON.stringify({token})
+      body: JSON.stringify({ })
     })
     .then(response => response.json())
     .then(json => {

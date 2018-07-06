@@ -32,8 +32,9 @@ const performSaveRecipe = (token, recipe) => (dispatch) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      token,
     },
-    body: JSON.stringify({ token, recipe }),
+    body: JSON.stringify({ recipe }),
   })
     .then(response => response.json())
     .then((json) => {

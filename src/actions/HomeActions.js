@@ -27,12 +27,12 @@ const getDashboardError = () => ({
 const performGetDashboard = token => (dispatch) => {
   dispatch(requestGetDashboard());
   return fetch(BASE_API.concat(GET_DASHBOARD), {
-    method: 'POST',
+    method: 'GET',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      token,
     },
-    body: JSON.stringify({ token }),
   })
     .then(response => response.json())
     .then((json) => {
