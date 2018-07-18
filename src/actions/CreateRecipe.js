@@ -11,6 +11,7 @@ export const REQUEST_SAVE_RECIPE = 'REQUEST_SAVE_RECIPE';
 export const SAVE_RECIPE_SUCCESS = 'SAVE_RECIPE_SUCCESS';
 export const SAVE_RECIPE_ERROR = 'SAVE_RECIPE_ERROR';
 export const SELECT_CATEGORY = 'SELECT_CATEGORY';
+export const CHEFF_NAME_INPUT_CHANGED = 'CHEFF_NAME_INPUT_CHANGED';
 
 const saveRecipeError = () => ({
   type: SAVE_RECIPE_ERROR,
@@ -69,6 +70,11 @@ export const recipeNameChanged = text => ({
 
 export const recipeDescriptionChanged = text => ({
   type: RECIPE_DESCRIPTION_CHANGED,
+  payload: text,
+});
+
+export const recipeCheffNameChanged = text => ({
+  type: CHEFF_NAME_INPUT_CHANGED,
   payload: text,
 });
 

@@ -3,6 +3,7 @@ import {
   HIDE_CREATE_RECIPE,
   RECIPE_NAME_CHANGED,
   RECIPE_DESCRIPTION_CHANGED,
+  CHEFF_NAME_INPUT_CHANGED,
   INGREDIENT_INPUT_CHANGED,
   ADD_INGREDIENT,
   REMOVE_INGREDIENT,
@@ -23,6 +24,7 @@ const INITIAL_STATE = {
   error: '',
   categoryIdSelected: '',
   recipeId: '',
+  cheffName: '',
 };
 
 const removeItemFromArrayById = (items, id) => {
@@ -58,6 +60,8 @@ const createRecipe = (state = INITIAL_STATE, action) => {
       return { ...state, recipeName: action.payload, error: '' };
     case RECIPE_DESCRIPTION_CHANGED:
       return { ...state, recipeDescription: action.payload, error: '' };
+    case CHEFF_NAME_INPUT_CHANGED:
+      return { ...state, cheffName: action.payload, error: '' };
     case INGREDIENT_INPUT_CHANGED:
       return { ...state, ingredientInput: action.payload, error: '' };
     case ADD_INGREDIENT:
@@ -92,6 +96,7 @@ const createRecipe = (state = INITIAL_STATE, action) => {
         ingredientInput: '',
         ingredients: parseIngredients(action.recipe.ingredients),
         categoryIdSelected: action.recipe.category.id,
+        cheffName: action.recipe.cheffName,
       };
     default:
       return state;

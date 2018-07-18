@@ -5,6 +5,7 @@ import {
   hideCreateRecipe,
   recipeNameChanged,
   recipeDescriptionChanged,
+  recipeCheffNameChanged,
   ingredientInputChanged,
   addIngredient,
   removeIngredient,
@@ -20,6 +21,7 @@ class CreateUpdateRecipe extends Component {
     super(props);
     this.nameChanged = this.nameChanged.bind(this);
     this.descriptionChanged = this.descriptionChanged.bind(this);
+    this.cheffNameChanged = this.cheffNameChanged.bind(this);
     this.ingredientNameChanged = this.ingredientNameChanged.bind(this);
     this.addIngredientClick = this.addIngredientClick.bind(this);
     this.saveClicked = this.saveClicked.bind(this);
@@ -31,6 +33,10 @@ class CreateUpdateRecipe extends Component {
 
   descriptionChanged(event) {
     this.props.recipeDescriptionChanged(event.target.value);
+  }
+
+  cheffNameChanged(event) {
+    this.props.recipeCheffNameChanged(event.target.value);
   }
 
   ingredientNameChanged(event) {
@@ -57,6 +63,7 @@ class CreateUpdateRecipe extends Component {
       id: this.props.recipeId,
       name: this.props.recipeName,
       description: this.props.recipeDescription,
+      cheffName: this.props.recipeCheff,
       category: { id: this.props.categoryIdSelected },
       ingredients,
     };
@@ -79,6 +86,8 @@ class CreateUpdateRecipe extends Component {
             disabled={this.props.isLoading}
           />
 
+          <br />
+          <br />
           <label htmlFor="description"><b>Preparación</b></label>
           <textarea
             id="description"
@@ -90,6 +99,18 @@ class CreateUpdateRecipe extends Component {
             disabled={this.props.isLoading}
           />
 
+          <label htmlFor="cheffName"><b>Nombre del chef  </b></label>
+          <input
+            id="cheffName"
+            type="text"
+            placeholder="Ingresa el nombre del chef"
+            required
+            value={this.props.recipeCheff}
+            onChange={this.cheffNameChanged}
+            disabled={this.props.isLoading}
+          />
+
+          <br />
           Seleciona una categoria:
           <br />
           <CategoryChooser
@@ -147,8 +168,10 @@ CreateUpdateRecipe.propTypes = {
   hideCreateRecipe: PropTypes.func.isRequired,
   recipeName: PropTypes.string.isRequired,
   recipeDescription: PropTypes.string.isRequired,
+  recipeCheff: PropTypes.string.isRequired,
   recipeNameChanged: PropTypes.func.isRequired,
   recipeDescriptionChanged: PropTypes.func.isRequired,
+  recipeCheffNameChanged: PropTypes.func.isRequired,
   ingredientInput: PropTypes.string.isRequired,
   ingredientInputChanged: PropTypes.func.isRequired,
   addIngredient: PropTypes.func.isRequired,
@@ -175,6 +198,7 @@ const mapStateToProps = state => ({
   token: state.auth.token,
   recipeName: state.createRecipe.recipeName,
   recipeDescription: state.createRecipe.recipeDescription,
+  recipeCheff: state.createRecipe.cheffName,
   ingredientInput: state.createRecipe.ingredientInput,
   ingredients: state.createRecipe.ingredients,
   isLoading: state.createRecipe.isLoading,
@@ -187,6 +211,7 @@ const mapDispatchToProps = dispatch => ({
   hideCreateRecipe: () => dispatch(hideCreateRecipe()),
   recipeNameChanged: text => dispatch(recipeNameChanged(text)),
   recipeDescriptionChanged: text => dispatch(recipeDescriptionChanged(text)),
+  recipeCheffNameChanged: text => dispatch(recipeCheffNameChanged(text)),
   ingredientInputChanged: text => dispatch(ingredientInputChanged(text)),
   addIngredient: ingredientName => dispatch(addIngredient(ingredientName)),
   removeIngredient: id => dispatch(removeIngredient(id)),
