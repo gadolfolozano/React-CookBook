@@ -81,24 +81,24 @@ class CreateUpdateRecipe extends Component {
       <div className="modal">
         <div className="modal-content" >
 
-          <FormControl error={false} disabled={this.props.isLoading} aria-describedby="recipe-name-error-text">
+          <FormControl error={this.props.recipeNameError} disabled={this.props.isLoading} aria-describedby="recipe-name-error-text">
             <InputLabel htmlFor="recipe-name-error">Nombre del plato</InputLabel>
             <Input id="recipe-name-error" value={this.props.recipeName} onChange={this.nameChanged} />
-            <FormHelperText id="recipe-name-error-text">{false ? 'Nombre de plato incorrecto' : ''}</FormHelperText>
+            <FormHelperText id="recipe-name-error-text">{this.props.recipeNameError ? 'Nombre de plato incorrecto' : ''}</FormHelperText>
           </FormControl>
 
           <br />
-          <FormControl error={false} disabled={this.props.isLoading} aria-describedby="description-error-text">
+          <FormControl error={this.props.recipeDescriptionError} disabled={this.props.isLoading} aria-describedby="description-error-text">
             <InputLabel htmlFor="description-error">Preparación</InputLabel>
             <Input id="description-error" value={this.props.recipeDescription} onChange={this.descriptionChanged} />
-            <FormHelperText id="description-error-text">{false ? 'Preparación incorrecta' : ''}</FormHelperText>
+            <FormHelperText id="description-error-text">{this.props.recipeDescriptionError ? 'Preparación incorrecta' : ''}</FormHelperText>
           </FormControl>
 
           <br />
-          <FormControl error={false} disabled={this.props.isLoading} aria-describedby="cheff-error-text">
+          <FormControl error={this.props.cheffNameError} disabled={this.props.isLoading} aria-describedby="cheff-error-text">
             <InputLabel htmlFor="cheff-error">Nombre del chef</InputLabel>
             <Input id="cheff-error" value={this.props.recipeCheff} onChange={this.cheffNameChanged} />
-            <FormHelperText id="cheff-error-text">{false ? 'Nombre de chef incorrecto' : ''}</FormHelperText>
+            <FormHelperText id="cheff-error-text">{this.props.cheffNameError ? 'Nombre de chef incorrecto' : ''}</FormHelperText>
           </FormControl>
 
           <br />
@@ -111,10 +111,10 @@ class CreateUpdateRecipe extends Component {
           />
 
           <br />
-          <FormControl error={false} disabled={this.props.isLoading} aria-describedby="ingredient-error-text">
+          <FormControl error={this.props.ingredientError} disabled={this.props.isLoading} aria-describedby="ingredient-error-text">
             <InputLabel htmlFor="ingredient-error">Ingrediente</InputLabel>
             <Input id="ingredient-error" value={this.props.ingredientInput} onChange={this.ingredientNameChanged} />
-            <FormHelperText id="ingredient-error-text">{false ? 'Nombre de ingrediente incorrecto' : ''}</FormHelperText>
+            <FormHelperText id="ingredient-error-text">{this.props.ingredientError ? 'Nombre de ingrediente incorrecto' : ''}</FormHelperText>
           </FormControl>
 
           <Button
@@ -184,6 +184,10 @@ CreateUpdateRecipe.propTypes = {
     text: PropTypes.string.isRequired,
   }).isRequired).isRequired,
   recipeId: PropTypes.string.isRequired,
+  recipeNameError: PropTypes.bool.isRequired,
+  recipeDescriptionError: PropTypes.bool.isRequired,
+  cheffNameError: PropTypes.bool.isRequired,
+  ingredientError: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -199,6 +203,10 @@ const mapStateToProps = state => ({
   createRecipeError: state.createRecipe.error,
   categoryIdSelected: state.createRecipe.categoryIdSelected,
   recipeId: state.createRecipe.recipeId,
+  recipeNameError: state.createRecipe.recipeNameError,
+  recipeDescriptionError: state.createRecipe.recipeDescriptionError,
+  cheffNameError: state.createRecipe.cheffNameError,
+  ingredientError: state.createRecipe.ingredientError,
 });
 
 const mapDispatchToProps = dispatch => ({

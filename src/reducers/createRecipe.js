@@ -15,6 +15,10 @@ import {
   SHOW_DELETE_RECIPE_CONFIRMATION,
   HIDE_DELETE_RECIPE_CONFIRMATION,
   REQUEST_REMOVE_RECIPE,
+  RECIPE_NAME_ERROR,
+  RECIPE_DESCRIPTION_ERROR,
+  RECIPE_CHEFF_NAME_ERROR,
+  INGREDIENT_ERROR,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -30,6 +34,10 @@ const INITIAL_STATE = {
   cheffName: '',
   mustShowDeleteRecipeConfirmation: false,
   recipeIdToRemove: '',
+  recipeNameError: false,
+  recipeDescriptionError: false,
+  cheffNameError: false,
+  ingredientError: false,
 };
 
 const removeItemFromArrayById = (items, id) => {
@@ -52,6 +60,14 @@ const parseIngredients = (ingredients) => {
 
 const createRecipe = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case RECIPE_NAME_ERROR:
+      return { ...state, recipeNameError: true };
+    case RECIPE_DESCRIPTION_ERROR:
+      return { ...state, recipeDescriptionError: true };
+    case RECIPE_CHEFF_NAME_ERROR:
+      return { ...state, cheffNameError: true };
+    case INGREDIENT_ERROR:
+      return { ...state, ingredientError: true };
     case SHOW_CREATE_RECIPE:
       return {
         ...state,
@@ -62,13 +78,33 @@ const createRecipe = (state = INITIAL_STATE, action) => {
     case HIDE_CREATE_RECIPE:
       return { ...state, ...INITIAL_STATE };
     case RECIPE_NAME_CHANGED:
-      return { ...state, recipeName: action.payload, error: '' };
+      return {
+        ...state,
+        recipeName: action.payload,
+        error: '',
+        recipeNameError: false,
+      };
     case RECIPE_DESCRIPTION_CHANGED:
-      return { ...state, recipeDescription: action.payload, error: '' };
+      return {
+        ...state,
+        recipeDescription: action.payload,
+        error: '',
+        recipeDescriptionError: false,
+      };
     case CHEFF_NAME_INPUT_CHANGED:
-      return { ...state, cheffName: action.payload, error: '' };
+      return {
+        ...state,
+        cheffName: action.payload,
+        error: '',
+        cheffNameError: false,
+      };
     case INGREDIENT_INPUT_CHANGED:
-      return { ...state, ingredientInput: action.payload, error: '' };
+      return {
+        ...state,
+        ingredientInput: action.payload,
+        error: '',
+        ingredientError: false,
+      };
     case ADD_INGREDIENT:
       return {
         ...state,

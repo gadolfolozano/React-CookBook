@@ -14,6 +14,10 @@ export const SELECT_CATEGORY = 'SELECT_CATEGORY';
 export const CHEFF_NAME_INPUT_CHANGED = 'CHEFF_NAME_INPUT_CHANGED';
 export const SHOW_DELETE_RECIPE_CONFIRMATION = 'SHOW_DELETE_RECIPE_CONFIRMATION';
 export const HIDE_DELETE_RECIPE_CONFIRMATION = 'HIDE_DELETE_RECIPE_CONFIRMATION';
+export const RECIPE_NAME_ERROR = 'RECIPE_NAME_ERROR';
+export const RECIPE_DESCRIPTION_ERROR = 'RECIPE_DESCRIPTION_ERROR';
+export const RECIPE_CHEFF_NAME_ERROR = 'RECIPE_CHEFF_NAME_ERROR';
+export const INGREDIENT_ERROR = 'INGREDIENT_ERROR';
 
 const saveRecipeError = () => ({
   type: SAVE_RECIPE_ERROR,
@@ -49,8 +53,42 @@ const performSaveRecipe = (token, recipe) => (dispatch) => {
     });
 };
 
+const recipeNameError = () => ({
+  type: RECIPE_NAME_ERROR,
+});
+
+const recipeDescriptionError = () => ({
+  type: RECIPE_DESCRIPTION_ERROR,
+});
+
+const recipeCheffNameError = () => ({
+  type: RECIPE_CHEFF_NAME_ERROR,
+});
+
+const ingredientError = () => ({
+  type: INGREDIENT_ERROR,
+});
+
+function validateInputs(dispatch, recipe) {
+  let validate = true;
+  const { name, description, cheffName } = recipe;
+  if (name === '' || name.length < 2) {
+    dispatch(recipeNameError());
+    validate = false;
+  }
+  if (description === '' || description.length < 2) {
+    dispatch(recipeDescriptionError());
+    validate = false;
+  }
+  if (cheffName === '' || cheffName.length < 2) {
+    dispatch(recipeCheffNameError());
+    validate = false;
+  }
+  return validate;
+}
+
 export const saveRecipe = (token, recipe) => (dispatch) => {
-  if (token && recipe) {
+  if (token && recipe && validateInputs(dispatch, recipe)) {
     dispatch(performSaveRecipe(token, recipe));
   } else {
     dispatch(saveRecipeError());
@@ -95,13 +133,21 @@ export const ingredientInputChanged = text => ({
 });
 
 let nextIngredientId = 10;
-export const addIngredient = (ingredientName) => {
+const addIngredientToList = (ingredientName) => {
   nextIngredientId += 1;
   return {
     type: ADD_INGREDIENT,
     payload: ingredientName,
     id: nextIngredientId,
   };
+};
+
+export const addIngredient = ingredientName => (dispatch) => {
+  if (ingredientName === '' || ingredientName.length < 2) {
+    dispatch(ingredientError());
+  } else {
+    dispatch(addIngredientToList(ingredientName));
+  }
 };
 
 export const removeIngredient = id => ({

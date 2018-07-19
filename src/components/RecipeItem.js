@@ -5,19 +5,19 @@ import Button from '@material-ui/core/Button';
 const RecipeItem = props => (
   <div className="recipeContainer">
     <p>
-      Name: {props.recipe.name}
+      Nomnbre del plato: {props.recipe.name}
       <br />
-      Description: {props.recipe.description}
+      Preparación: {props.recipe.description}
       <br />
-      Category: {props.recipe.category.name}
+      Categoria: {props.recipe.category.name}
       <br />
-      Chef: {props.recipe.cheffName}
+      Nombre del Cheff: {props.recipe.cheffName}
       <br />
-      Ingredients:&nbsp;
+      Ingredientes:&nbsp;
       {
         props.recipe.ingredients.map((ingredientName, index) => (
           <b key={index}>
-            { ingredientName } &nbsp;
+            { ingredientName } &nbsp;&nbsp;
           </b>))
       }
     </p>
