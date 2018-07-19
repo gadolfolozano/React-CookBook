@@ -5,7 +5,6 @@ export * from './CategoryFilterList';
 export * from './Login';
 export * from './RecipeItem';
 export * from './RecipeList';
-export * from './IngredientItem';
 export * from './IngredientList';
 export * from './CategoryOption';
 export * from './CategoryChooser';

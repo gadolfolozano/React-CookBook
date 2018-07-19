@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { IngredientItem } from '../components';
+import Chip from '@material-ui/core/Chip';
 
 const IngredientList = props => (
   <div>
     {
       props.ingredients.map(ingredient =>
-        (<IngredientItem
+        (<Chip
           key={ingredient.id}
-          text={ingredient.name}
-          onRemoveItem={() => props.onRemoveItem(ingredient.id)}
+          label={ingredient.name}
+          onDelete={() => props.onRemoveItem(ingredient.id)}
         />))
     }
   </div>

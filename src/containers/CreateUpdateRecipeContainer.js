@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
 import {
   hideCreateRecipe,
   recipeNameChanged,
@@ -75,43 +80,29 @@ class CreateUpdateRecipe extends Component {
     return (
       <div className="modal">
         <div className="modal-content" >
-          <label htmlFor="recipeName"><b>Nombre del plato</b></label>
-          <input
-            id="recipeName"
-            type="text"
-            placeholder="Ingresa un nombre"
-            required
-            value={this.props.recipeName}
-            onChange={this.nameChanged}
-            disabled={this.props.isLoading}
-          />
+
+          <FormControl error={false} disabled={this.props.isLoading} aria-describedby="recipe-name-error-text">
+            <InputLabel htmlFor="recipe-name-error">Nombre del plato</InputLabel>
+            <Input id="recipe-name-error" value={this.props.recipeName} onChange={this.nameChanged} />
+            <FormHelperText id="recipe-name-error-text">{false ? 'Nombre de plato incorrecto' : ''}</FormHelperText>
+          </FormControl>
+
+          <br />
+          <FormControl error={false} disabled={this.props.isLoading} aria-describedby="description-error-text">
+            <InputLabel htmlFor="description-error">Preparación</InputLabel>
+            <Input id="description-error" value={this.props.recipeDescription} onChange={this.descriptionChanged} />
+            <FormHelperText id="description-error-text">{false ? 'Preparación incorrecta' : ''}</FormHelperText>
+          </FormControl>
+
+          <br />
+          <FormControl error={false} disabled={this.props.isLoading} aria-describedby="cheff-error-text">
+            <InputLabel htmlFor="cheff-error">Nombre del chef</InputLabel>
+            <Input id="cheff-error" value={this.props.recipeCheff} onChange={this.cheffNameChanged} />
+            <FormHelperText id="cheff-error-text">{false ? 'Nombre de chef incorrecto' : ''}</FormHelperText>
+          </FormControl>
 
           <br />
           <br />
-          <label htmlFor="description"><b>Preparación</b></label>
-          <textarea
-            id="description"
-            type="text"
-            placeholder="Ingresa la Preparación"
-            required
-            value={this.props.recipeDescription}
-            onChange={this.descriptionChanged}
-            disabled={this.props.isLoading}
-          />
-
-          <label htmlFor="cheffName"><b>Nombre del chef  </b></label>
-          <input
-            id="cheffName"
-            type="text"
-            placeholder="Ingresa el nombre del chef"
-            required
-            value={this.props.recipeCheff}
-            onChange={this.cheffNameChanged}
-            disabled={this.props.isLoading}
-          />
-
-          <br />
-          Seleciona una categoria:
           <br />
           <CategoryChooser
             categories={this.props.categories}
@@ -119,23 +110,20 @@ class CreateUpdateRecipe extends Component {
             categoryIdSelected={this.props.categoryIdSelected}
           />
 
-          <label htmlFor="ingredients"><b>Ingredientes</b></label>
-          <input
-            id="ingredients"
-            type="text"
-            placeholder="Ingresa un nombre"
-            required
-            value={this.props.ingredientInput}
-            onChange={this.ingredientNameChanged}
-            disabled={this.props.isLoading}
-          />
+          <br />
+          <FormControl error={false} disabled={this.props.isLoading} aria-describedby="ingredient-error-text">
+            <InputLabel htmlFor="ingredient-error">Ingrediente</InputLabel>
+            <Input id="ingredient-error" value={this.props.ingredientInput} onChange={this.ingredientNameChanged} />
+            <FormHelperText id="ingredient-error-text">{false ? 'Nombre de ingrediente incorrecto' : ''}</FormHelperText>
+          </FormControl>
 
-          <button
+          <Button
+            variant="contained"
             onClick={this.addIngredientClick}
             disabled={this.props.isLoading}
           >
-            Agregar ingrediente
-          </button>
+            Agregar
+          </Button>
 
           <IngredientList
             ingredients={this.props.ingredients}
@@ -143,20 +131,26 @@ class CreateUpdateRecipe extends Component {
             disabled={this.props.isLoading}
           />
 
-          <button
+          <br />
+          <br />
+
+          <Button
+            variant="contained"
+            color="primary"
             disabled={this.props.isLoading}
             onClick={this.saveClicked}
           >
             Guardar
-          </button>
+          </Button>
 
-          <button
-            className="cancelbtn"
+          <Button
+            variant="contained"
+            color="secondary"
             onClick={this.props.hideCreateRecipe}
             disabled={this.props.isLoading}
           >
-            Close
-          </button>
+            Cerrar
+          </Button>
 
         </div>
       </div>

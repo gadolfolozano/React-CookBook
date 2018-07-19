@@ -50,12 +50,13 @@ class DashBoard extends Component {
     return (
       <div>
 
-        <button
-          className="cancelbtn"
+        <Button
+          variant="contained"
+          color="secondary"
           onClick={this.onLogoutClick}
         >
-          LogOut
-        </button>
+          Cerrar Sesión
+        </Button>
 
         <Input
           id="search"

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
 
 const RecipeItem = props => (
   <div className="recipeContainer">
@@ -20,18 +21,22 @@ const RecipeItem = props => (
           </b>))
       }
     </p>
-    <button
+
+    <Button
+      variant="contained"
+      color="primary"
       onClick={props.showEditRecipe}
     >
-      Edit
-    </button>
+      Editar
+    </Button>
 
-    <button
-      className="cancelbtn"
+    <Button
+      variant="contained"
+      color="secondary"
       onClick={props.removeRecipe}
     >
-      Delete
-    </button>
+      Eliminar
+    </Button>
   </div>
 );
 

@@ -51,7 +51,6 @@ class Login extends Component {
         </FormControl>
 
         <br />
-        <br />
 
         <FormControl error={this.props.passwordError} disabled={this.props.isFetching} aria-describedby="password-error-text">
           <InputLabel htmlFor="password-error">Contraseña</InputLabel>
