@@ -12,6 +12,8 @@ export const SAVE_RECIPE_SUCCESS = 'SAVE_RECIPE_SUCCESS';
 export const SAVE_RECIPE_ERROR = 'SAVE_RECIPE_ERROR';
 export const SELECT_CATEGORY = 'SELECT_CATEGORY';
 export const CHEFF_NAME_INPUT_CHANGED = 'CHEFF_NAME_INPUT_CHANGED';
+export const SHOW_DELETE_RECIPE_CONFIRMATION = 'SHOW_DELETE_RECIPE_CONFIRMATION';
+export const HIDE_DELETE_RECIPE_CONFIRMATION = 'HIDE_DELETE_RECIPE_CONFIRMATION';
 
 const saveRecipeError = () => ({
   type: SAVE_RECIPE_ERROR,
@@ -61,6 +63,15 @@ export const showCreateRecipe = () => ({
 
 export const hideCreateRecipe = () => ({
   type: HIDE_CREATE_RECIPE,
+});
+
+export const showDeleteRecipeConfirmation = recipeId => ({
+  type: SHOW_DELETE_RECIPE_CONFIRMATION,
+  recipeId,
+});
+
+export const hideDeleteRecipeConfirmation = () => ({
+  type: HIDE_DELETE_RECIPE_CONFIRMATION,
 });
 
 export const recipeNameChanged = text => ({

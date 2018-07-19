@@ -14,6 +14,7 @@ const parseRecipes = (items) => {
       description: item.description,
       ingredients: item.ingredients,
       category: item.category,
+      cheffName: item.cheffName,
     });
   });
   return parsedArray;

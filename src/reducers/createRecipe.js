@@ -12,6 +12,9 @@ import {
   SAVE_RECIPE_ERROR,
   SELECT_CATEGORY,
   SHOW_EDIT_RECIPE,
+  SHOW_DELETE_RECIPE_CONFIRMATION,
+  HIDE_DELETE_RECIPE_CONFIRMATION,
+  REQUEST_REMOVE_RECIPE,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -25,6 +28,8 @@ const INITIAL_STATE = {
   categoryIdSelected: '',
   recipeId: '',
   cheffName: '',
+  mustShowDeleteRecipeConfirmation: false,
+  recipeIdToRemove: '',
 };
 
 const removeItemFromArrayById = (items, id) => {
@@ -97,6 +102,19 @@ const createRecipe = (state = INITIAL_STATE, action) => {
         ingredients: parseIngredients(action.recipe.ingredients),
         categoryIdSelected: action.recipe.category.id,
         cheffName: action.recipe.cheffName,
+      };
+    case SHOW_DELETE_RECIPE_CONFIRMATION:
+      return {
+        ...state,
+        mustShowDeleteRecipeConfirmation: true,
+        recipeIdToRemove: action.recipeId,
+      };
+    case REQUEST_REMOVE_RECIPE:
+    case HIDE_DELETE_RECIPE_CONFIRMATION:
+      return {
+        ...state,
+        mustShowDeleteRecipeConfirmation: false,
+        recipeIdToRemove: '',
       };
     default:
       return state;

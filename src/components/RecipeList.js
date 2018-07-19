@@ -10,7 +10,7 @@ const RecipeList = props => (
         <RecipeItem
           key={recipe.id}
           recipe={recipe}
-          removeRecipe={() => props.removeRecipe(props.token, recipe.id)}
+          removeRecipe={() => props.showDeleteRecipeConfirmation(recipe.id)}
           showEditRecipe={() => props.showEditRecipe(recipe)}
         />
       ))
